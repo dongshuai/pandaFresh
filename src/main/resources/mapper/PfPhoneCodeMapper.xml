@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pf.app.api.mapper.PfPhoneCodeMapper" >
+  <cache-ref namespace="com.pf.app.api.mapper.PfPhoneCodeMapper"/>
+  <resultMap id="BaseResultMap" type="com.pf.app.api.model.PfPhoneCode" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="phone_num" property="phoneNum" jdbcType="CHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="exp" property="exp" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    phone_num, code, exp, create_time
+  </sql>
+</mapper>
