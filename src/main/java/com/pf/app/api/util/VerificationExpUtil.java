@@ -2,7 +2,7 @@ package com.pf.app.api.util;
 
 import java.util.Date;
 
-public class VerificationCodeExpUtil {
+public class VerificationExpUtil {
 
     public static Boolean isExp(Date expDate){
         long now = new Date().getTime();

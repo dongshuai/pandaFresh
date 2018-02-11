@@ -15,7 +15,7 @@ import com.pf.app.api.proxy.InterfaceResponse;
 import com.pf.app.api.util.IdWorkerFactory;
 import com.pf.app.api.util.JwtUtil;
 import com.pf.app.api.util.ValidatorUtil;
-import com.pf.app.api.util.VerificationCodeExpUtil;
+import com.pf.app.api.util.VerificationExpUtil;
 import com.pf.app.api.vo.LoginVo;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
@@ -72,7 +72,7 @@ public class LoginService extends AbstractService<LoginVo> {
             return error(1000,"验证码错误");
         }
         Date expDate = DateUtils.addMinutes(pfPhoneCode.getCreateTime(),pfPhoneCode.getExp());
-        if(VerificationCodeExpUtil.isExp(expDate)){
+        if(VerificationExpUtil.isExp(expDate)){
             logger.debug("用户验证码过期");
             return error(1000,"验证码错误");
         }

@@ -18,21 +18,22 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/deal-order")
-public class DealOrderController extends BaseController{
+@RequestMapping("/private")
+public class PrivateController extends BaseController{
 
     /**
      * 日志记录
      */
-    private static final Logger logger = LoggerFactory.getLogger(DealOrderController.class);
+    private static final Logger logger = LoggerFactory.getLogger(PrivateController.class);
     /**
      *  URL处理服务类map
      */
-    private Map<String,RrpService> commonsMap = new HashMap<>();
+    private Map<String,RrpService> commandMap = new HashMap<>();
 
 
     @PostConstruct
@@ -41,9 +42,12 @@ public class DealOrderController extends BaseController{
 
     }
 
-    @PostMapping("/gold/{command}")
+    @PostMapping("/api/{command}")
     public InterfaceResponse buyGold(@PathVariable String command, HttpServletRequest request){
-        RrpService service = commonsMap.get(command);
+        RrpService service = commandMap.get(command);
+        if(service == null){
+            return new DefaultInterfaceResponse().error(404, "接口不存在");
+        }
 
         String token = (String)request.getAttribute("token");
 

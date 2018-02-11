@@ -30,7 +30,7 @@ public class PublicController extends BaseController {
     /**
      * 日志记录
      */
-    private static final Logger logger = LoggerFactory.getLogger(DealOrderController.class);
+    private static final Logger logger = LoggerFactory.getLogger(PrivateController.class);
     /**
      *  URL处理服务类map
      */
