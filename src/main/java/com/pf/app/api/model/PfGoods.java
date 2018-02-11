@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.Date;
 
 @Table(name = "pf_goods")
 public class PfGoods implements Serializable {
@@ -30,22 +31,10 @@ public class PfGoods implements Serializable {
     private String description;
 
     /**
-     * 配送类型1:30分钟达2：次日达
+     * 配送类型1:30分钟达2：次日达3：折扣商品
      */
     @Column(name = "delivery_type")
     private Byte deliveryType;
-
-    /**
-     * 是否为推荐商品0：不推荐 >0 推荐，数越大排序越靠后
-     */
-    @Column(name = "recommend_seq")
-    private Integer recommendSeq;
-
-    /**
-     * 0
-     */
-    @Column(name = "berserk_seq")
-    private Integer berserkSeq;
 
     /**
      * 人工排序
@@ -64,6 +53,52 @@ public class PfGoods implements Serializable {
      */
     @Column(name = "detail_url")
     private String detailUrl;
+
+    /**
+     * 城市名称
+     */
+    private String city;
+
+    /**
+     * 商品原价，单位：分
+     */
+    private Long price;
+
+    /**
+     * 会员价格 单位：分
+     */
+    @Column(name = "member_price")
+    private Long memberPrice;
+
+    /**
+     * 折扣价：单位分
+     */
+    @Column(name = "discount_price")
+    private Long discountPrice;
+
+    /**
+     * 第二件减 单位分
+     */
+    @Column(name = "second_reduce")
+    private Long secondReduce;
+
+    /**
+     * 推荐排序,0:不推荐 >0 推荐数字越小越靠前
+     */
+    @Column(name = "recommend_seq")
+    private Integer recommendSeq;
+
+    /**
+     * 爆款推荐，0：不推荐 >0推荐
+     */
+    @Column(name = "berserk_seq")
+    private Integer berserkSeq;
+
+    /**
+     * 创建时间
+     */
+    @Column(name = "create_time")
+    private Date createTime;
 
     private static final long serialVersionUID = 1L;
 
@@ -140,57 +175,21 @@ public class PfGoods implements Serializable {
     }
 
     /**
-     * 获取配送类型1:30分钟达2：次日达
+     * 获取配送类型1:30分钟达2：次日达3：折扣商品
      *
-     * @return delivery_type - 配送类型1:30分钟达2：次日达
+     * @return delivery_type - 配送类型1:30分钟达2：次日达3：折扣商品
      */
     public Byte getDeliveryType() {
         return deliveryType;
     }
 
     /**
-     * 设置配送类型1:30分钟达2：次日达
+     * 设置配送类型1:30分钟达2：次日达3：折扣商品
      *
-     * @param deliveryType 配送类型1:30分钟达2：次日达
+     * @param deliveryType 配送类型1:30分钟达2：次日达3：折扣商品
      */
     public void setDeliveryType(Byte deliveryType) {
         this.deliveryType = deliveryType;
-    }
-
-    /**
-     * 获取是否为推荐商品0：不推荐 >0 推荐，数越大排序越靠后
-     *
-     * @return recommend_seq - 是否为推荐商品0：不推荐 >0 推荐，数越大排序越靠后
-     */
-    public Integer getRecommendSeq() {
-        return recommendSeq;
-    }
-
-    /**
-     * 设置是否为推荐商品0：不推荐 >0 推荐，数越大排序越靠后
-     *
-     * @param recommendSeq 是否为推荐商品0：不推荐 >0 推荐，数越大排序越靠后
-     */
-    public void setRecommendSeq(Integer recommendSeq) {
-        this.recommendSeq = recommendSeq;
-    }
-
-    /**
-     * 获取0
-     *
-     * @return berserk_seq - 0
-     */
-    public Integer getBerserkSeq() {
-        return berserkSeq;
-    }
-
-    /**
-     * 设置0
-     *
-     * @param berserkSeq 0
-     */
-    public void setBerserkSeq(Integer berserkSeq) {
-        this.berserkSeq = berserkSeq;
     }
 
     /**
@@ -247,6 +246,150 @@ public class PfGoods implements Serializable {
         this.detailUrl = detailUrl == null ? null : detailUrl.trim();
     }
 
+    /**
+     * 获取城市名称
+     *
+     * @return city - 城市名称
+     */
+    public String getCity() {
+        return city;
+    }
+
+    /**
+     * 设置城市名称
+     *
+     * @param city 城市名称
+     */
+    public void setCity(String city) {
+        this.city = city == null ? null : city.trim();
+    }
+
+    /**
+     * 获取商品原价，单位：分
+     *
+     * @return price - 商品原价，单位：分
+     */
+    public Long getPrice() {
+        return price;
+    }
+
+    /**
+     * 设置商品原价，单位：分
+     *
+     * @param price 商品原价，单位：分
+     */
+    public void setPrice(Long price) {
+        this.price = price;
+    }
+
+    /**
+     * 获取会员价格 单位：分
+     *
+     * @return member_price - 会员价格 单位：分
+     */
+    public Long getMemberPrice() {
+        return memberPrice;
+    }
+
+    /**
+     * 设置会员价格 单位：分
+     *
+     * @param memberPrice 会员价格 单位：分
+     */
+    public void setMemberPrice(Long memberPrice) {
+        this.memberPrice = memberPrice;
+    }
+
+    /**
+     * 获取折扣价：单位分
+     *
+     * @return discount_price - 折扣价：单位分
+     */
+    public Long getDiscountPrice() {
+        return discountPrice;
+    }
+
+    /**
+     * 设置折扣价：单位分
+     *
+     * @param discountPrice 折扣价：单位分
+     */
+    public void setDiscountPrice(Long discountPrice) {
+        this.discountPrice = discountPrice;
+    }
+
+    /**
+     * 获取第二件减 单位分
+     *
+     * @return second_reduce - 第二件减 单位分
+     */
+    public Long getSecondReduce() {
+        return secondReduce;
+    }
+
+    /**
+     * 设置第二件减 单位分
+     *
+     * @param secondReduce 第二件减 单位分
+     */
+    public void setSecondReduce(Long secondReduce) {
+        this.secondReduce = secondReduce;
+    }
+
+    /**
+     * 获取推荐排序,0:不推荐 >0 推荐数字越小越靠前
+     *
+     * @return recommend_seq - 推荐排序,0:不推荐 >0 推荐数字越小越靠前
+     */
+    public Integer getRecommendSeq() {
+        return recommendSeq;
+    }
+
+    /**
+     * 设置推荐排序,0:不推荐 >0 推荐数字越小越靠前
+     *
+     * @param recommendSeq 推荐排序,0:不推荐 >0 推荐数字越小越靠前
+     */
+    public void setRecommendSeq(Integer recommendSeq) {
+        this.recommendSeq = recommendSeq;
+    }
+
+    /**
+     * 获取爆款推荐，0：不推荐 >0推荐
+     *
+     * @return berserk_seq - 爆款推荐，0：不推荐 >0推荐
+     */
+    public Integer getBerserkSeq() {
+        return berserkSeq;
+    }
+
+    /**
+     * 设置爆款推荐，0：不推荐 >0推荐
+     *
+     * @param berserkSeq 爆款推荐，0：不推荐 >0推荐
+     */
+    public void setBerserkSeq(Integer berserkSeq) {
+        this.berserkSeq = berserkSeq;
+    }
+
+    /**
+     * 获取创建时间
+     *
+     * @return create_time - 创建时间
+     */
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    /**
+     * 设置创建时间
+     *
+     * @param createTime 创建时间
+     */
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -264,11 +407,17 @@ public class PfGoods implements Serializable {
             && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
             && (this.getDescription() == null ? other.getDescription() == null : this.getDescription().equals(other.getDescription()))
             && (this.getDeliveryType() == null ? other.getDeliveryType() == null : this.getDeliveryType().equals(other.getDeliveryType()))
-            && (this.getRecommendSeq() == null ? other.getRecommendSeq() == null : this.getRecommendSeq().equals(other.getRecommendSeq()))
-            && (this.getBerserkSeq() == null ? other.getBerserkSeq() == null : this.getBerserkSeq().equals(other.getBerserkSeq()))
             && (this.getOrderSeq() == null ? other.getOrderSeq() == null : this.getOrderSeq().equals(other.getOrderSeq()))
             && (this.getSaleFlag() == null ? other.getSaleFlag() == null : this.getSaleFlag().equals(other.getSaleFlag()))
-            && (this.getDetailUrl() == null ? other.getDetailUrl() == null : this.getDetailUrl().equals(other.getDetailUrl()));
+            && (this.getDetailUrl() == null ? other.getDetailUrl() == null : this.getDetailUrl().equals(other.getDetailUrl()))
+            && (this.getCity() == null ? other.getCity() == null : this.getCity().equals(other.getCity()))
+            && (this.getPrice() == null ? other.getPrice() == null : this.getPrice().equals(other.getPrice()))
+            && (this.getMemberPrice() == null ? other.getMemberPrice() == null : this.getMemberPrice().equals(other.getMemberPrice()))
+            && (this.getDiscountPrice() == null ? other.getDiscountPrice() == null : this.getDiscountPrice().equals(other.getDiscountPrice()))
+            && (this.getSecondReduce() == null ? other.getSecondReduce() == null : this.getSecondReduce().equals(other.getSecondReduce()))
+            && (this.getRecommendSeq() == null ? other.getRecommendSeq() == null : this.getRecommendSeq().equals(other.getRecommendSeq()))
+            && (this.getBerserkSeq() == null ? other.getBerserkSeq() == null : this.getBerserkSeq().equals(other.getBerserkSeq()))
+            && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()));
     }
 
     @Override
@@ -280,11 +429,17 @@ public class PfGoods implements Serializable {
         result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
         result = prime * result + ((getDescription() == null) ? 0 : getDescription().hashCode());
         result = prime * result + ((getDeliveryType() == null) ? 0 : getDeliveryType().hashCode());
-        result = prime * result + ((getRecommendSeq() == null) ? 0 : getRecommendSeq().hashCode());
-        result = prime * result + ((getBerserkSeq() == null) ? 0 : getBerserkSeq().hashCode());
         result = prime * result + ((getOrderSeq() == null) ? 0 : getOrderSeq().hashCode());
         result = prime * result + ((getSaleFlag() == null) ? 0 : getSaleFlag().hashCode());
         result = prime * result + ((getDetailUrl() == null) ? 0 : getDetailUrl().hashCode());
+        result = prime * result + ((getCity() == null) ? 0 : getCity().hashCode());
+        result = prime * result + ((getPrice() == null) ? 0 : getPrice().hashCode());
+        result = prime * result + ((getMemberPrice() == null) ? 0 : getMemberPrice().hashCode());
+        result = prime * result + ((getDiscountPrice() == null) ? 0 : getDiscountPrice().hashCode());
+        result = prime * result + ((getSecondReduce() == null) ? 0 : getSecondReduce().hashCode());
+        result = prime * result + ((getRecommendSeq() == null) ? 0 : getRecommendSeq().hashCode());
+        result = prime * result + ((getBerserkSeq() == null) ? 0 : getBerserkSeq().hashCode());
+        result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
         return result;
     }
 
@@ -299,11 +454,17 @@ public class PfGoods implements Serializable {
         sb.append(", name=").append(name);
         sb.append(", description=").append(description);
         sb.append(", deliveryType=").append(deliveryType);
-        sb.append(", recommendSeq=").append(recommendSeq);
-        sb.append(", berserkSeq=").append(berserkSeq);
         sb.append(", orderSeq=").append(orderSeq);
         sb.append(", saleFlag=").append(saleFlag);
         sb.append(", detailUrl=").append(detailUrl);
+        sb.append(", city=").append(city);
+        sb.append(", price=").append(price);
+        sb.append(", memberPrice=").append(memberPrice);
+        sb.append(", discountPrice=").append(discountPrice);
+        sb.append(", secondReduce=").append(secondReduce);
+        sb.append(", recommendSeq=").append(recommendSeq);
+        sb.append(", berserkSeq=").append(berserkSeq);
+        sb.append(", createTime=").append(createTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

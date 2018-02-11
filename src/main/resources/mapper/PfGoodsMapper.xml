@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pf.app.api.mapper.PfGoodsMapper" >
+  <resultMap id="BaseResultMap" type="com.pf.app.api.model.PfGoods" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="category_id" property="categoryId" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="delivery_type" property="deliveryType" jdbcType="TINYINT" />
+    <result column="order_seq" property="orderSeq" jdbcType="INTEGER" />
+    <result column="sale_flag" property="saleFlag" jdbcType="TINYINT" />
+    <result column="detail_url" property="detailUrl" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="BIGINT" />
+    <result column="member_price" property="memberPrice" jdbcType="BIGINT" />
+    <result column="discount_price" property="discountPrice" jdbcType="BIGINT" />
+    <result column="second_reduce" property="secondReduce" jdbcType="BIGINT" />
+    <result column="recommend_seq" property="recommendSeq" jdbcType="INTEGER" />
+    <result column="berserk_seq" property="berserkSeq" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    id, category_id, name, description, delivery_type, order_seq, sale_flag, detail_url, 
+    city, price, member_price, discount_price, second_reduce, recommend_seq, berserk_seq, 
+    create_time
+  </sql>
+</mapper>

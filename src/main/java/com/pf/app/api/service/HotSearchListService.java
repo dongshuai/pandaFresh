@@ -5,7 +5,6 @@ import com.pf.app.api.mapper.PfHotSearchMapper;
 import com.pf.app.api.model.PfHotSearch;
 import com.pf.app.api.proxy.InterfaceResponse;
 import com.pf.app.api.vo.HotSearchVo;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

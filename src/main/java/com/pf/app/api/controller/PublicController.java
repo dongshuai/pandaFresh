@@ -7,6 +7,7 @@ import com.pf.app.api.proxy.DefaultInterfaceResponse;
 import com.pf.app.api.proxy.InterfaceResponse;
 import com.pf.app.api.proxy.RrpService;
 import com.pf.app.api.service.GetVerificationCodeService;
+import com.pf.app.api.service.GoodsListService;
 import com.pf.app.api.service.HotSearchListService;
 import com.pf.app.api.service.LoginService;
 import com.pf.app.api.vo.VO;
@@ -47,8 +48,13 @@ public class PublicController extends BaseController {
      */
     @Resource
     private LoginService loginService;
+    /**
+     * 热词搜索列表
+     */
     @Resource
     private HotSearchListService hotSearchListService;
+    @Resource
+    private GoodsListService goodsListService;
 
 
     @PostConstruct
@@ -56,7 +62,7 @@ public class PublicController extends BaseController {
         commandMap.put("get-code",getVerificationCodeService);//验证码
         commandMap.put("login",loginService);//登录或注册
         commandMap.put("hot-word-list",hotSearchListService);//热门查询前十条
-
+        commandMap.put("goods-list",goodsListService);
     }
 
 
