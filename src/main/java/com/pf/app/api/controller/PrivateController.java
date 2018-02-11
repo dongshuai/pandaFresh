@@ -7,6 +7,7 @@ import com.pf.app.api.exception.UserVoucherException;
 import com.pf.app.api.proxy.DefaultInterfaceResponse;
 import com.pf.app.api.proxy.InterfaceResponse;
 import com.pf.app.api.proxy.RrpService;
+import com.pf.app.api.service.AddUserAddrService;
 import com.pf.app.api.service.HotSearchListService;
 import com.pf.app.api.service.MessageListService;
 import com.pf.app.api.util.Constant;
@@ -44,13 +45,15 @@ public class PrivateController extends BaseController{
      */
     @Resource
     private MessageListService messageListService;
+    @Resource
+    private AddUserAddrService addUserAddrService;
 
 
 
     @PostConstruct
     public void init(){
         commandMap.put("msg-list",messageListService);
-
+        commandMap.put("add-addr",addUserAddrService);
     }
 
     @PostMapping("/api/{command}")
