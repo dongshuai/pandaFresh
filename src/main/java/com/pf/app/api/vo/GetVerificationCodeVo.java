@@ -1,6 +1,6 @@
 package com.pf.app.api.vo;
 
-public class VerificationCodeVo implements VO {
+public class GetVerificationCodeVo implements VO {
 
     private String phoneNum;
 

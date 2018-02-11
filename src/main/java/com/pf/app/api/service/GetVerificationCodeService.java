@@ -5,8 +5,7 @@ import com.pf.app.api.model.PfPhoneCode;
 import com.pf.app.api.proxy.InterfaceResponse;
 import com.pf.app.api.util.RandomNumUtil;
 import com.pf.app.api.util.ValidatorUtil;
-import com.pf.app.api.vo.VerificationCodeVo;
-import org.apache.commons.lang3.StringUtils;
+import com.pf.app.api.vo.GetVerificationCodeVo;
 import org.apache.commons.lang3.time.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,14 +15,14 @@ import javax.annotation.Resource;
 import java.util.Date;
 
 @Service
-public class GetVerificationCodeService extends AbstractService<VerificationCodeVo> {
+public class GetVerificationCodeService extends AbstractService<GetVerificationCodeVo> {
 
     private static final Logger logger = LoggerFactory.getLogger(GetVerificationCodeService.class);
 
     @Resource
     private PfPhoneCodeMapper pfPhoneCodeMapper;
     @Override
-    public InterfaceResponse check(VerificationCodeVo vo) {
+    public InterfaceResponse check(GetVerificationCodeVo vo) {
         logger.info("验证参数开始");
         logger.debug("传入参数：{}",vo);
         String phoneNum = vo.getPhoneNum();
@@ -35,7 +34,7 @@ public class GetVerificationCodeService extends AbstractService<VerificationCode
     }
 
     @Override
-    public InterfaceResponse executor(VerificationCodeVo vo) {
+    public InterfaceResponse executor(GetVerificationCodeVo vo) {
         logger.info("发送验证码开始");
         String phoneNum = vo.getPhoneNum();
 

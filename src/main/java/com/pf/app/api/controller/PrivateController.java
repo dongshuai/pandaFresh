@@ -7,6 +7,8 @@ import com.pf.app.api.exception.UserVoucherException;
 import com.pf.app.api.proxy.DefaultInterfaceResponse;
 import com.pf.app.api.proxy.InterfaceResponse;
 import com.pf.app.api.proxy.RrpService;
+import com.pf.app.api.service.HotSearchListService;
+import com.pf.app.api.util.Constant;
 import com.pf.app.api.vo.VO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
@@ -36,6 +39,7 @@ public class PrivateController extends BaseController{
     private Map<String,RrpService> commandMap = new HashMap<>();
 
 
+
     @PostConstruct
     public void init(){
 
@@ -49,9 +53,9 @@ public class PrivateController extends BaseController{
             return new DefaultInterfaceResponse().error(404, "接口不存在");
         }
 
-        String token = (String)request.getAttribute("token");
+        String userId = (String)request.getAttribute(Constant.USER_ID);
 
-        service.setRequest(request);
+        service.setUserId(userId);
         VO vo = (VO)service.createVo();
         ServletRequestDataBinder binder = new ServletRequestDataBinder(vo);
         binder.bind(request);

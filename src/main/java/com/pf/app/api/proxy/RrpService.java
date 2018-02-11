@@ -1,6 +1,5 @@
 package com.pf.app.api.proxy;
 
-import javax.servlet.http.HttpServletRequest;
 
 public interface RrpService<T> {
 
@@ -8,5 +7,5 @@ public interface RrpService<T> {
 
     T createVo();
 
-    void setRequest(HttpServletRequest request);
+    void setUserId(String userId);
 }

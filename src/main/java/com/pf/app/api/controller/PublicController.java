@@ -7,6 +7,7 @@ import com.pf.app.api.proxy.DefaultInterfaceResponse;
 import com.pf.app.api.proxy.InterfaceResponse;
 import com.pf.app.api.proxy.RrpService;
 import com.pf.app.api.service.GetVerificationCodeService;
+import com.pf.app.api.service.HotSearchListService;
 import com.pf.app.api.service.LoginService;
 import com.pf.app.api.vo.VO;
 import org.slf4j.Logger;
@@ -46,12 +47,15 @@ public class PublicController extends BaseController {
      */
     @Resource
     private LoginService loginService;
+    @Resource
+    private HotSearchListService hotSearchListService;
 
 
     @PostConstruct
     public void init(){
         commandMap.put("get-code",getVerificationCodeService);//验证码
         commandMap.put("login",loginService);//登录或注册
+        commandMap.put("hot-word-list",hotSearchListService);//热门查询前十条
 
     }
 
@@ -59,7 +63,9 @@ public class PublicController extends BaseController {
     @PostMapping("/api/{command}")
     public InterfaceResponse getCode(@PathVariable String command, HttpServletRequest request){
         RrpService service = commandMap.get(command);
-        service.setRequest(request);
+        if(service == null){
+            return new DefaultInterfaceResponse().error(404, "接口不存在");
+        }
         VO vo = (VO)service.createVo();
         ServletRequestDataBinder binder = new ServletRequestDataBinder(vo);
         binder.bind(request);
