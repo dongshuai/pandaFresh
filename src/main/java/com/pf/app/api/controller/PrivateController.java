@@ -8,6 +8,7 @@ import com.pf.app.api.proxy.DefaultInterfaceResponse;
 import com.pf.app.api.proxy.InterfaceResponse;
 import com.pf.app.api.proxy.RrpService;
 import com.pf.app.api.service.HotSearchListService;
+import com.pf.app.api.service.MessageListService;
 import com.pf.app.api.util.Constant;
 import com.pf.app.api.vo.VO;
 import org.slf4j.Logger;
@@ -38,11 +39,17 @@ public class PrivateController extends BaseController{
      */
     private Map<String,RrpService> commandMap = new HashMap<>();
 
+    /**
+     * 消息列表服务
+     */
+    @Resource
+    private MessageListService messageListService;
+
 
 
     @PostConstruct
     public void init(){
-
+        commandMap.put("msg-list",messageListService);
 
     }
 
@@ -53,7 +60,7 @@ public class PrivateController extends BaseController{
             return new DefaultInterfaceResponse().error(404, "接口不存在");
         }
 
-        String userId = (String)request.getAttribute(Constant.USER_ID);
+        Long userId = (Long)request.getAttribute(Constant.USER_ID);
 
         service.setUserId(userId);
         VO vo = (VO)service.createVo();

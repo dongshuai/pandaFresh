@@ -23,7 +23,7 @@ public abstract class AbstractService<T> implements RrpService<T>, RrpServicePro
     protected static final Logger logger = LoggerFactory.getLogger(AbstractService.class);
     protected static final String[] READ_ONLY_PREFIX = new String[]{"query", "info", "check"};
     private static String HEADER_TOKEN;
-    private  String userId;
+    private  Long userId;
     private Class<T> clazz;
     protected RrpServiceProxy target;
 
@@ -31,12 +31,12 @@ public abstract class AbstractService<T> implements RrpService<T>, RrpServicePro
         clazz = ReflectUtil.findParameterizedType(getClass(),0);
     }
 
-    public String getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
     @Override
-    public void setUserId(String userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 

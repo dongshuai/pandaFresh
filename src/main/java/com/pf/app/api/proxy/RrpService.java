@@ -7,5 +7,5 @@ public interface RrpService<T> {
 
     T createVo();
 
-    void setUserId(String userId);
+    void setUserId(Long userId);
 }

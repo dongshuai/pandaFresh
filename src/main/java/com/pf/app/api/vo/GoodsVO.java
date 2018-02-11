@@ -3,7 +3,7 @@ package com.pf.app.api.vo;
 import javax.persistence.Column;
 import javax.persistence.Id;
 
-public class GoodsVO implements VO{
+public class GoodsVO extends BaseVo implements VO{
 
     /**
      * 主键

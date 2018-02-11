@@ -52,7 +52,9 @@ public class GoodsListService extends AbstractService<GoodsVO> {
             logger.debug("查询单个商品信息");
             PfGoods goods = pfGoodsMapper.selectByPrimaryKey(id);
             List<PfGoods> pfGoodsList = new ArrayList<>(1);
-            pfGoodsList.add(goods);
+            if(null != goods){
+                pfGoodsList.add(goods);
+            }
             return success(pfGoodsList);
         }
 
@@ -86,7 +88,7 @@ public class GoodsListService extends AbstractService<GoodsVO> {
         }
         criteria.andEqualTo("city", vo.getCity().trim());
 
-        Page<PfGoods> page = PageHelper.startPage(1, 3).doSelectPage(() -> pfGoodsMapper.selectByExample(example));
+        Page<PfGoods> page = PageHelper.startPage(vo.getPageNum(), vo.getPageSize()).doSelectPage(() -> pfGoodsMapper.selectByExample(example));
         logger.info("查询商品列表结束");
         return success(page);
 
