@@ -8,6 +8,7 @@ import com.pf.app.api.proxy.DefaultInterfaceResponse;
 import com.pf.app.api.proxy.InterfaceResponse;
 import com.pf.app.api.proxy.RrpService;
 import com.pf.app.api.service.AddUserAddrService;
+import com.pf.app.api.service.AddrListService;
 import com.pf.app.api.service.HotSearchListService;
 import com.pf.app.api.service.MessageListService;
 import com.pf.app.api.util.Constant;
@@ -45,15 +46,24 @@ public class PrivateController extends BaseController{
      */
     @Resource
     private MessageListService messageListService;
+    /**
+     * 新增用户地址
+     */
     @Resource
     private AddUserAddrService addUserAddrService;
 
+    /**
+     * 用户地址列表
+     */
+    @Resource
+    private AddrListService addrListService;
 
 
     @PostConstruct
     public void init(){
         commandMap.put("msg-list",messageListService);
         commandMap.put("add-addr",addUserAddrService);
+        commandMap.put("addr-list",addrListService);
     }
 
     @PostMapping("/api/{command}")
@@ -70,7 +80,9 @@ public class PrivateController extends BaseController{
         ServletRequestDataBinder binder = new ServletRequestDataBinder(vo);
         binder.bind(request);
 
-        try {
+       return doResponse(service,vo);
+
+        /*try {
             return service.execute(vo);
         } catch (OrderException e) {
             return new DefaultInterfaceResponse().error(6001, e.getMessage());
@@ -82,7 +94,7 @@ public class PrivateController extends BaseController{
             e.printStackTrace();
             logger.error("mainController异常："+e);
             return new DefaultInterfaceResponse().error("system error : [ {} ]", e.getMessage());
-        }
+        }*/
     }
 
 }

@@ -75,8 +75,8 @@ public class PublicController extends BaseController {
         VO vo = (VO)service.createVo();
         ServletRequestDataBinder binder = new ServletRequestDataBinder(vo);
         binder.bind(request);
-
-        try {
+        return doResponse(service,vo);
+       /* try {
             return service.execute(vo);
         } catch (OrderException e) {
             return new DefaultInterfaceResponse().error(6001, e.getMessage());
@@ -88,6 +88,6 @@ public class PublicController extends BaseController {
             e.printStackTrace();
             logger.error("mainController异常："+e);
             return new DefaultInterfaceResponse().error("system error : [ {} ]", e.getMessage());
-        }
+        }*/
     }
 }
