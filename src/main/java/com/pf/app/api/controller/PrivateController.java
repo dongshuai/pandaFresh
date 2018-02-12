@@ -11,6 +11,7 @@ import com.pf.app.api.service.AddUserAddrService;
 import com.pf.app.api.service.AddrListService;
 import com.pf.app.api.service.HotSearchListService;
 import com.pf.app.api.service.MessageListService;
+import com.pf.app.api.service.ShoppingListService;
 import com.pf.app.api.util.Constant;
 import com.pf.app.api.vo.VO;
 import org.slf4j.Logger;
@@ -58,12 +59,19 @@ public class PrivateController extends BaseController{
     @Resource
     private AddrListService addrListService;
 
+    /**
+     * 购物车
+     */
+    @Resource
+    private ShoppingListService shoppingListService;
+
 
     @PostConstruct
     public void init(){
         commandMap.put("msg-list",messageListService);
         commandMap.put("add-addr",addUserAddrService);
         commandMap.put("addr-list",addrListService);
+        commandMap.put("shopping-list",shoppingListService);
     }
 
     @PostMapping("/api/{command}")

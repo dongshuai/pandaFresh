@@ -15,7 +15,6 @@ import tk.mybatis.mapper.entity.Example;
 import javax.annotation.Resource;
 
 @Service
-@ReadOnly
 public class AddUserAddrService extends AbstractService<AddrVo> {
 
     @Resource

@@ -31,6 +31,11 @@ public class PfGoods implements Serializable {
     private String description;
 
     /**
+     * 商品类型1:正常商品2：预售商品3：折扣商品
+     */
+    private Byte type;
+
+    /**
      * 配送类型1:30分钟达2：次日达3：折扣商品
      */
     @Column(name = "delivery_type")
@@ -172,6 +177,23 @@ public class PfGoods implements Serializable {
      */
     public void setDescription(String description) {
         this.description = description == null ? null : description.trim();
+    }
+
+    /**
+     * 获取商品类型
+     *
+     * @return type - 商品类型
+     */
+    public Byte getType() {
+        return type;
+    }
+    /**
+     * 设置商品类型
+     *
+     * @param type 商品类型
+     */
+    public void setType(Byte type) {
+        this.type = type;
     }
 
     /**

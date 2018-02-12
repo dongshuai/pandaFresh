@@ -20,12 +20,6 @@ public class PfShoppingCart implements Serializable {
     private Long goodsId;
 
     /**
-     * 商品名称
-     */
-    @Column(name = "goods_name")
-    private String goodsName;
-
-    /**
      * 用户主键
      */
     @Column(name = "user_id")
@@ -72,24 +66,6 @@ public class PfShoppingCart implements Serializable {
      */
     public void setGoodsId(Long goodsId) {
         this.goodsId = goodsId;
-    }
-
-    /**
-     * 获取商品名称
-     *
-     * @return goods_name - 商品名称
-     */
-    public String getGoodsName() {
-        return goodsName;
-    }
-
-    /**
-     * 设置商品名称
-     *
-     * @param goodsName 商品名称
-     */
-    public void setGoodsName(String goodsName) {
-        this.goodsName = goodsName == null ? null : goodsName.trim();
     }
 
     /**
@@ -142,7 +118,6 @@ public class PfShoppingCart implements Serializable {
         PfShoppingCart other = (PfShoppingCart) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getGoodsId() == null ? other.getGoodsId() == null : this.getGoodsId().equals(other.getGoodsId()))
-            && (this.getGoodsName() == null ? other.getGoodsName() == null : this.getGoodsName().equals(other.getGoodsName()))
             && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
             && (this.getAmount() == null ? other.getAmount() == null : this.getAmount().equals(other.getAmount()));
     }
@@ -153,7 +128,6 @@ public class PfShoppingCart implements Serializable {
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getGoodsId() == null) ? 0 : getGoodsId().hashCode());
-        result = prime * result + ((getGoodsName() == null) ? 0 : getGoodsName().hashCode());
         result = prime * result + ((getUserId() == null) ? 0 : getUserId().hashCode());
         result = prime * result + ((getAmount() == null) ? 0 : getAmount().hashCode());
         return result;
@@ -167,7 +141,6 @@ public class PfShoppingCart implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", goodsId=").append(goodsId);
-        sb.append(", goodsName=").append(goodsName);
         sb.append(", userId=").append(userId);
         sb.append(", amount=").append(amount);
         sb.append(", serialVersionUID=").append(serialVersionUID);
