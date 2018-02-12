@@ -6,6 +6,7 @@ import com.pf.app.api.exception.UserVoucherException;
 import com.pf.app.api.proxy.DefaultInterfaceResponse;
 import com.pf.app.api.proxy.InterfaceResponse;
 import com.pf.app.api.proxy.RrpService;
+import com.pf.app.api.service.CategoryListService;
 import com.pf.app.api.service.GetVerificationCodeService;
 import com.pf.app.api.service.GoodsListService;
 import com.pf.app.api.service.HotSearchListService;
@@ -53,8 +54,15 @@ public class PublicController extends BaseController {
      */
     @Resource
     private HotSearchListService hotSearchListService;
+
+    /**
+     * 商品列表服务类
+     */
     @Resource
     private GoodsListService goodsListService;
+
+    @Resource
+    private CategoryListService categoryListService;
 
 
     @PostConstruct
@@ -62,7 +70,8 @@ public class PublicController extends BaseController {
         commandMap.put("get-code",getVerificationCodeService);//验证码
         commandMap.put("login",loginService);//登录或注册
         commandMap.put("hot-word-list",hotSearchListService);//热门查询前十条
-        commandMap.put("goods-list",goodsListService);
+        commandMap.put("goods-list",goodsListService);//商品列表
+                                commandMap.put("category-list",categoryListService);//分类列表
     }
 
 
