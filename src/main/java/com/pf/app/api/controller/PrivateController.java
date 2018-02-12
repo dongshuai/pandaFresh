@@ -12,6 +12,7 @@ import com.pf.app.api.service.AddUserAddrService;
 import com.pf.app.api.service.AddrListService;
 import com.pf.app.api.service.HotSearchListService;
 import com.pf.app.api.service.MessageListService;
+import com.pf.app.api.service.RedBagListService;
 import com.pf.app.api.service.ShoppingListService;
 import com.pf.app.api.util.Constant;
 import com.pf.app.api.vo.VO;
@@ -32,16 +33,16 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/private")
-public class PrivateController extends BaseController{
+public class PrivateController extends BaseController {
 
     /**
      * 日志记录
      */
     private static final Logger logger = LoggerFactory.getLogger(PrivateController.class);
     /**
-     *  URL处理服务类map
+     * URL处理服务类map
      */
-    private Map<String,RrpService> commandMap = new HashMap<>();
+    private Map<String, RrpService> commandMap = new HashMap<>();
 
     /**
      * 消息列表服务
@@ -65,35 +66,42 @@ public class PrivateController extends BaseController{
      */
     @Resource
     private ShoppingListService shoppingListService;
-
+    /**
+     * 添加购物车商品
+     */
     @Resource
     private AddShoppingCardService addShoppingCardService;
-
+    /**
+     * 红包记录列表
+     */
+    @Resource
+    private RedBagListService redBagListService;
 
     @PostConstruct
-    public void init(){
-        commandMap.put("msg-list",messageListService);
-        commandMap.put("add-addr",addUserAddrService);
-        commandMap.put("addr-list",addrListService);
-        commandMap.put("shopping-list",shoppingListService);
-        commandMap.put("add-shopping-card",addShoppingCardService);
+    public void init() {
+        commandMap.put("msg-list", messageListService);
+        commandMap.put("add-addr", addUserAddrService);
+        commandMap.put("addr-list", addrListService);
+        commandMap.put("shopping-list", shoppingListService);
+        commandMap.put("add-shopping-card", addShoppingCardService);
+        commandMap.put("redbag-list",redBagListService);
     }
 
     @PostMapping("/api/{command}")
-    public InterfaceResponse buyGold(@PathVariable String command, HttpServletRequest request){
+    public InterfaceResponse buyGold(@PathVariable String command, HttpServletRequest request) {
         RrpService service = commandMap.get(command);
-        if(service == null){
+        if (service == null) {
             return new DefaultInterfaceResponse().error(404, "接口不存在");
         }
 
-        Long userId = (Long)request.getAttribute(Constant.USER_ID);
+        Long userId = (Long) request.getAttribute(Constant.USER_ID);
 
         service.setUserId(userId);
-        VO vo = (VO)service.createVo();
+        VO vo = (VO) service.createVo();
         ServletRequestDataBinder binder = new ServletRequestDataBinder(vo);
         binder.bind(request);
 
-       return doResponse(service,vo);
+        return doResponse(service, vo);
 
         /*try {
             return service.execute(vo);
