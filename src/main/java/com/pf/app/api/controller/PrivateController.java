@@ -10,6 +10,7 @@ import com.pf.app.api.proxy.RrpService;
 import com.pf.app.api.service.AddShoppingCardService;
 import com.pf.app.api.service.AddUserAddrService;
 import com.pf.app.api.service.AddrListService;
+import com.pf.app.api.service.DeleteShoppingCardService;
 import com.pf.app.api.service.HotSearchListService;
 import com.pf.app.api.service.MessageListService;
 import com.pf.app.api.service.RedBagListService;
@@ -67,6 +68,11 @@ public class PrivateController extends BaseController {
     @Resource
     private ShoppingListService shoppingListService;
     /**
+     * 删除购物车商品列表
+     */
+    @Resource
+    private DeleteShoppingCardService deleteShoppingCardService;
+    /**
      * 添加购物车商品
      */
     @Resource
@@ -79,12 +85,13 @@ public class PrivateController extends BaseController {
 
     @PostConstruct
     public void init() {
-        commandMap.put("msg-list", messageListService);
-        commandMap.put("add-addr", addUserAddrService);
-        commandMap.put("addr-list", addrListService);
-        commandMap.put("shopping-list", shoppingListService);
-        commandMap.put("add-shopping-card", addShoppingCardService);
-        commandMap.put("redbag-list",redBagListService);
+        commandMap.put("msg-list", messageListService);//消息列表
+        commandMap.put("add-addr", addUserAddrService);//新增用户地址
+        commandMap.put("addr-list", addrListService);//收货地址列表
+        commandMap.put("shopping-list", shoppingListService);//购物车商品列表
+        commandMap.put("add-shopping-card", addShoppingCardService);//添加商品到购物车
+        commandMap.put("delete-shopping-card",deleteShoppingCardService);//删除购物车商品
+        commandMap.put("redbag-list",redBagListService);//红包列表
     }
 
     @PostMapping("/api/{command}")

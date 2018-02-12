@@ -35,9 +35,9 @@ public class PublicController extends BaseController {
      */
     private static final Logger logger = LoggerFactory.getLogger(PrivateController.class);
     /**
-     *  URL处理服务类map
+     * URL处理服务类map
      */
-    private Map<String,RrpService> commandMap = new HashMap<>();
+    private Map<String, RrpService> commandMap = new HashMap<>();
     /**
      * 获取验证码
      */
@@ -66,25 +66,25 @@ public class PublicController extends BaseController {
 
 
     @PostConstruct
-    public void init(){
-        commandMap.put("get-code",getVerificationCodeService);//验证码
-        commandMap.put("login",loginService);//登录或注册
-        commandMap.put("hot-word-list",hotSearchListService);//热门查询前十条
-        commandMap.put("goods-list",goodsListService);//商品列表
-                                commandMap.put("category-list",categoryListService);//分类列表
+    public void init() {
+        commandMap.put("get-code", getVerificationCodeService);//验证码
+        commandMap.put("login", loginService);//登录或注册
+        commandMap.put("hot-word-list", hotSearchListService);//热门查询前十条
+        commandMap.put("goods-list", goodsListService);//商品列表
+        commandMap.put("category-list", categoryListService);//分类列表
     }
 
 
     @PostMapping("/api/{command}")
-    public InterfaceResponse getCode(@PathVariable String command, HttpServletRequest request){
+    public InterfaceResponse getCode(@PathVariable String command, HttpServletRequest request) {
         RrpService service = commandMap.get(command);
-        if(service == null){
+        if (service == null) {
             return new DefaultInterfaceResponse().error(404, "接口不存在");
         }
-        VO vo = (VO)service.createVo();
+        VO vo = (VO) service.createVo();
         ServletRequestDataBinder binder = new ServletRequestDataBinder(vo);
         binder.bind(request);
-        return doResponse(service,vo);
+        return doResponse(service, vo);
        /* try {
             return service.execute(vo);
         } catch (OrderException e) {
