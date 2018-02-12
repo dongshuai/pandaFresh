@@ -7,6 +7,7 @@ import com.pf.app.api.exception.UserVoucherException;
 import com.pf.app.api.proxy.DefaultInterfaceResponse;
 import com.pf.app.api.proxy.InterfaceResponse;
 import com.pf.app.api.proxy.RrpService;
+import com.pf.app.api.service.AddShoppingCardService;
 import com.pf.app.api.service.AddUserAddrService;
 import com.pf.app.api.service.AddrListService;
 import com.pf.app.api.service.HotSearchListService;
@@ -65,6 +66,9 @@ public class PrivateController extends BaseController{
     @Resource
     private ShoppingListService shoppingListService;
 
+    @Resource
+    private AddShoppingCardService addShoppingCardService;
+
 
     @PostConstruct
     public void init(){
@@ -72,6 +76,7 @@ public class PrivateController extends BaseController{
         commandMap.put("add-addr",addUserAddrService);
         commandMap.put("addr-list",addrListService);
         commandMap.put("shopping-list",shoppingListService);
+        commandMap.put("add-shopping-card",addShoppingCardService);
     }
 
     @PostMapping("/api/{command}")
