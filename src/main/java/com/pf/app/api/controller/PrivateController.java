@@ -1,6 +1,7 @@
 package com.pf.app.api.controller;
 
 
+import com.pf.app.api.annotation.ReadOnly;
 import com.pf.app.api.exception.OrderException;
 import com.pf.app.api.exception.UserAccountException;
 import com.pf.app.api.exception.UserVoucherException;
@@ -13,10 +14,13 @@ import com.pf.app.api.service.AddrListService;
 import com.pf.app.api.service.DeleteShoppingCardService;
 import com.pf.app.api.service.HotSearchListService;
 import com.pf.app.api.service.MessageListService;
+import com.pf.app.api.service.QueryBalanceService;
 import com.pf.app.api.service.RedBagListService;
 import com.pf.app.api.service.ShoppingListService;
+import com.pf.app.api.service.UpdateShoppingCardService;
 import com.pf.app.api.util.Constant;
 import com.pf.app.api.vo.VO;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.ServletRequestDataBinder;
@@ -77,11 +81,22 @@ public class PrivateController extends BaseController {
      */
     @Resource
     private AddShoppingCardService addShoppingCardService;
+
+    /**
+     * 更改购车商品数量
+     */
+    @Resource
+    private UpdateShoppingCardService updateShoppingCardService;
     /**
      * 红包记录列表
      */
     @Resource
     private RedBagListService redBagListService;
+    /**
+     * 用户查询越信息
+     */
+    @Resource
+    private QueryBalanceService queryBalanceService;
 
     @PostConstruct
     public void init() {
@@ -91,7 +106,9 @@ public class PrivateController extends BaseController {
         commandMap.put("shopping-list", shoppingListService);//购物车商品列表
         commandMap.put("add-shopping-card", addShoppingCardService);//添加商品到购物车
         commandMap.put("delete-shopping-card",deleteShoppingCardService);//删除购物车商品
+        commandMap.put("update-shopping-card",updateShoppingCardService);//更改购车商品数量
         commandMap.put("redbag-list",redBagListService);//红包列表
+        commandMap.put("query-balance",queryBalanceService);//用户查询余额
     }
 
     @PostMapping("/api/{command}")

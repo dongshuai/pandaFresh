@@ -1,5 +1,7 @@
 package com.pf.app.api.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -25,6 +27,7 @@ public class PfUserBalance implements Serializable {
      * 最后一次变更时间
      */
     @Column(name = "last_change_time")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date lastChangeTime;
 
     private static final long serialVersionUID = 1L;

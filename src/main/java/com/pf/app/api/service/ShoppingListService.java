@@ -50,30 +50,29 @@ public class ShoppingListService extends AbstractService<ShopingListVo> {
 
         List<PfGoods> realTimeGoodsSortList = new ArrayList(5);
         List<PfGoods> preSaleGoodsSortList = new ArrayList(5);
-        for(Long  goodId:goodsIdList){
-            for(PfGoods pfGoods : realTimeGoodsList){
-                if(goodId.compareTo(pfGoods.getId())==0 ){
-                    realTimeGoodsSortList.add(pfGoods);
-                }
-            }
+        createShoppingCard(pfShoppingCartList,realTimeGoodsList,realTimeGoodsSortList);
 
-        }
 
         Example preSalePfGoodExample = new Example(PfGoods.class);
         preSalePfGoodExample.createCriteria().andIn("id",goodsIdList).andEqualTo("deliveryType",new Byte("2"));
         List<PfGoods> preSaleGoodsList = pfGoodsMapper.selectByExample(preSalePfGoodExample);
+        createShoppingCard(pfShoppingCartList,preSaleGoodsList,preSaleGoodsSortList);
 
-        for(Long  goodId:goodsIdList){
-            for(PfGoods pfGoods : preSaleGoodsList){
-                if(goodId.compareTo(pfGoods.getId())==0 ){
-                    preSaleGoodsSortList.add(pfGoods);
-                }
-            }
-
-        }
         Map<String,List<PfGoods>> shoppingCard = new HashMap<>(2);
         shoppingCard.put("realTimeGoodsSortList",realTimeGoodsSortList);
         shoppingCard.put("preSaleGoodsSortList",preSaleGoodsSortList);
         return success(shoppingCard);
+    }
+
+    private void createShoppingCard(List<PfShoppingCart> pfShoppingCartList,List<PfGoods> pfGoodsList,List<PfGoods> resultList){
+        for(PfShoppingCart psc :pfShoppingCartList){
+            for(PfGoods pfGoods : pfGoodsList){
+                if(psc.getGoodsId().compareTo(pfGoods.getId())==0 ){
+                    pfGoods.setAmout(psc.getAmount());
+                    resultList.add(pfGoods);
+                }
+            }
+
+        }
     }
 }

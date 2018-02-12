@@ -3,11 +3,18 @@ package com.pf.app.api.model;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.Date;
 
 @Table(name = "pf_goods")
 public class PfGoods implements Serializable {
+    /**
+     * 商品数量
+     */
+    @Transient
+    Integer amout;
+
     /**
      * 主键
      */
@@ -106,6 +113,14 @@ public class PfGoods implements Serializable {
     private Date createTime;
 
     private static final long serialVersionUID = 1L;
+
+    public Integer getAmout() {
+        return amout;
+    }
+
+    public void setAmout(Integer amout) {
+        this.amout = amout;
+    }
 
     /**
      * 获取主键
