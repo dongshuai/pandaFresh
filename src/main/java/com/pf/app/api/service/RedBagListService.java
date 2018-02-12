@@ -34,7 +34,7 @@ public class RedBagListService extends AbstractService<RedBagVo> {
         Example example = new Example(PfUserRedbagRecord.class);
         example.createCriteria().andEqualTo("userId",getUserId());
 
-        Page<PfGoods> page = PageHelper.startPage(vo.getPageNum(), vo.getPageSize()).doSelectPage(() -> pfUserRedbagRecordMapper.selectByExample(example));
+        Page<PfUserRedbagRecord> page = PageHelper.startPage(vo.getPageNum(), vo.getPageSize()).doSelectPage(() -> pfUserRedbagRecordMapper.selectByExample(example));
         logger.info("查询用户红包记录结束");
         return success(page);
     }

@@ -18,6 +18,7 @@ import com.pf.app.api.service.QueryBalanceService;
 import com.pf.app.api.service.RedBagListService;
 import com.pf.app.api.service.ShoppingListService;
 import com.pf.app.api.service.UpdateShoppingCardService;
+import com.pf.app.api.service.VoucherListService;
 import com.pf.app.api.util.Constant;
 import com.pf.app.api.vo.VO;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -98,6 +99,12 @@ public class PrivateController extends BaseController {
     @Resource
     private QueryBalanceService queryBalanceService;
 
+    /**
+     * 优惠券列表
+     */
+    @Resource
+    private VoucherListService voucherListService;
+
     @PostConstruct
     public void init() {
         commandMap.put("msg-list", messageListService);//消息列表
@@ -109,6 +116,7 @@ public class PrivateController extends BaseController {
         commandMap.put("update-shopping-card",updateShoppingCardService);//更改购车商品数量
         commandMap.put("redbag-list",redBagListService);//红包列表
         commandMap.put("query-balance",queryBalanceService);//用户查询余额
+        commandMap.put("voucher-list",voucherListService);//优惠券列表
     }
 
     @PostMapping("/api/{command}")

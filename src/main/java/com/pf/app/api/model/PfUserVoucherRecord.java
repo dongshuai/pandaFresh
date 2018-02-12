@@ -1,13 +1,22 @@
 package com.pf.app.api.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.Date;
 
 @Table(name = "pf_user_voucher_record")
 public class PfUserVoucherRecord implements Serializable {
+
+    /**
+     * 是否过期 true 过期 false没有过期
+     */
+    @Transient
+    private Boolean overdue;
     /**
      * 主键
      */
@@ -23,6 +32,7 @@ public class PfUserVoucherRecord implements Serializable {
      * 创建时间
      */
     @Column(name = "create_time")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     /**
@@ -47,6 +57,7 @@ public class PfUserVoucherRecord implements Serializable {
      * 过期时间
      */
     @Column(name = "valid_end_time")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date validEndTime;
 
     /**
@@ -56,6 +67,14 @@ public class PfUserVoucherRecord implements Serializable {
     private Integer useCondition;
 
     private static final long serialVersionUID = 1L;
+
+    public Boolean getOverdue() {
+        return overdue;
+    }
+
+    public void setOverdue(Boolean overdue) {
+        this.overdue = overdue;
+    }
 
     /**
      * 获取主键
