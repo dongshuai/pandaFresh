@@ -3,11 +3,17 @@ package com.pf.app.api.model;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.Date;
 
 @Table(name = "pf_user")
 public class PfUser implements Serializable {
+    /**
+     * 是否是会员 true 是 false 否
+     */
+    @Transient
+    Boolean member;
     /**
      * 用户主键
      */
@@ -43,7 +49,21 @@ public class PfUser implements Serializable {
     @Column(name = "recommend_user_id")
     private Long recommendUserId;
 
+    /**
+     * 会员到期日期
+     */
+    @Column(name = "member_end_date")
+    private Date memberEndDate;
+
     private static final long serialVersionUID = 1L;
+
+    public Boolean getMember() {
+        return member;
+    }
+
+    public void setMember(Boolean member) {
+        this.member = member;
+    }
 
     /**
      * 获取用户主键
@@ -153,6 +173,24 @@ public class PfUser implements Serializable {
         this.recommendUserId = recommendUserId;
     }
 
+    /**
+     * 获取会员到期日期
+     *
+     * @return member_end_date - 会员到期日期
+     */
+    public Date getMemberEndDate() {
+        return memberEndDate;
+    }
+
+    /**
+     * 设置会员到期日期
+     *
+     * @param memberEndDate 会员到期日期
+     */
+    public void setMemberEndDate(Date memberEndDate) {
+        this.memberEndDate = memberEndDate;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -170,7 +208,8 @@ public class PfUser implements Serializable {
             && (this.getPicUrl() == null ? other.getPicUrl() == null : this.getPicUrl().equals(other.getPicUrl()))
             && (this.getPhoneNum() == null ? other.getPhoneNum() == null : this.getPhoneNum().equals(other.getPhoneNum()))
             && (this.getRegTime() == null ? other.getRegTime() == null : this.getRegTime().equals(other.getRegTime()))
-            && (this.getRecommendUserId() == null ? other.getRecommendUserId() == null : this.getRecommendUserId().equals(other.getRecommendUserId()));
+            && (this.getRecommendUserId() == null ? other.getRecommendUserId() == null : this.getRecommendUserId().equals(other.getRecommendUserId()))
+            && (this.getMemberEndDate() == null ? other.getMemberEndDate() == null : this.getMemberEndDate().equals(other.getMemberEndDate()));
     }
 
     @Override
@@ -183,6 +222,7 @@ public class PfUser implements Serializable {
         result = prime * result + ((getPhoneNum() == null) ? 0 : getPhoneNum().hashCode());
         result = prime * result + ((getRegTime() == null) ? 0 : getRegTime().hashCode());
         result = prime * result + ((getRecommendUserId() == null) ? 0 : getRecommendUserId().hashCode());
+        result = prime * result + ((getMemberEndDate() == null) ? 0 : getMemberEndDate().hashCode());
         return result;
     }
 
@@ -198,6 +238,7 @@ public class PfUser implements Serializable {
         sb.append(", phoneNum=").append(phoneNum);
         sb.append(", regTime=").append(regTime);
         sb.append(", recommendUserId=").append(recommendUserId);
+        sb.append(", memberEndDate=").append(memberEndDate);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
