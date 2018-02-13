@@ -1,5 +1,6 @@
 package com.pf.app.api.controller;
 
+import com.pf.app.api.annotation.ReadOnly;
 import com.pf.app.api.exception.OrderException;
 import com.pf.app.api.exception.UserAccountException;
 import com.pf.app.api.exception.UserVoucherException;
@@ -11,6 +12,8 @@ import com.pf.app.api.service.GetVerificationCodeService;
 import com.pf.app.api.service.GoodsListService;
 import com.pf.app.api.service.HotSearchListService;
 import com.pf.app.api.service.LoginService;
+import com.pf.app.api.service.ThirdPartyBindService;
+import com.pf.app.api.service.ThirdPartyLoginService;
 import com.pf.app.api.vo.VO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -60,10 +63,22 @@ public class PublicController extends BaseController {
      */
     @Resource
     private GoodsListService goodsListService;
-
+    /**
+     * 商品类别服务类
+     */
     @Resource
     private CategoryListService categoryListService;
 
+    /**
+     * 第三方登录
+     */
+    @Resource
+    private ThirdPartyLoginService thirdPartyLoginService;
+    /**
+     * 第三方用户绑定
+     */
+    @Resource
+    private ThirdPartyBindService thirdPartyBindService;
 
     @PostConstruct
     public void init() {
@@ -72,6 +87,8 @@ public class PublicController extends BaseController {
         commandMap.put("hot-word-list", hotSearchListService);//热门查询前十条
         commandMap.put("goods-list", goodsListService);//商品列表
         commandMap.put("category-list", categoryListService);//分类列表
+        commandMap.put("third-party-login",thirdPartyLoginService);//第三方用户登录
+        commandMap.put("third-party-bind",thirdPartyBindService);//第三方用户绑定
     }
 
 
@@ -85,18 +102,5 @@ public class PublicController extends BaseController {
         ServletRequestDataBinder binder = new ServletRequestDataBinder(vo);
         binder.bind(request);
         return doResponse(service, vo);
-       /* try {
-            return service.execute(vo);
-        } catch (OrderException e) {
-            return new DefaultInterfaceResponse().error(6001, e.getMessage());
-        } catch (UserAccountException e) {
-            return new DefaultInterfaceResponse().error(1010, e.getMessage());
-        } catch (UserVoucherException e){
-            return new DefaultInterfaceResponse().error(1020, e.getMessage());
-        } catch(Exception e) {
-            e.printStackTrace();
-            logger.error("mainController异常："+e);
-            return new DefaultInterfaceResponse().error("system error : [ {} ]", e.getMessage());
-        }*/
     }
 }
