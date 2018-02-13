@@ -23,8 +23,11 @@ import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class LoginService extends AbstractService<LoginVo> {
@@ -105,9 +108,29 @@ public class LoginService extends AbstractService<LoginVo> {
         }
         logger.debug("token : {}", token);
 
+        Date now = DateUtils.ceiling(new Date(), Calendar.DATE);
 
+        Date memberEndDate = pfUser.getMemberEndDate();
+        if(memberEndDate!=null && now.getTime()<=memberEndDate.getTime()){
+            logger.debug("用户是会员，设置会员用户");
+            pfUser.setMember(true);
+        }else {
+            logger.debug("用户不是会员");
+            pfUser.setMember(false);
+        }
+        long userId =pfUser.getId();
+        PfUserVoucher pfUserVoucher = pfUserVoucherMapper.selectByPrimaryKey(userId);
+        PfUserBalance pfUserBalance = pfUserBalanceMapper.selectByPrimaryKey(userId);
+        PfUserRedbag pfUserRedbag = pfUserRedbagMapper.selectByPrimaryKey(userId);
+
+        Map<String,Object> userInfoMap = new HashMap<>(5);
+        userInfoMap.put("token",token);
+        userInfoMap.put("user",pfUser);
+        userInfoMap.put("totalRedbag",pfUserRedbag.getTotalAmount());
+        userInfoMap.put("totalBalance",pfUserBalance.getTotalAmount());
+        userInfoMap.put("totalVoucher",pfUserVoucher.getTotalAmount());
         logger.info("用户登录执行结束");
-        return success(token);
+        return success(userInfoMap);
     }
 
     private PfUser  saveUserInfo(LoginVo vo){
