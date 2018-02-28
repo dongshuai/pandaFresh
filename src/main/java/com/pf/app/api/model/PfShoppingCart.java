@@ -14,21 +14,33 @@ public class PfShoppingCart implements Serializable {
     private Long id;
 
     /**
-     * 商品主键
-     */
-    @Column(name = "goods_id")
-    private Long goodsId;
-
-    /**
      * 用户主键
      */
     @Column(name = "user_id")
     private Long userId;
 
     /**
+     * 商品主键
+     */
+    @Column(name = "goods_id")
+    private Long goodsId;
+
+    /**
+     * 商品名称
+     */
+    @Column(name = "goods_name")
+    private String goodsName;
+
+    /**
      * 商品数量
      */
     private Integer amount;
+
+    /**
+     * 配送单主键 0：表示未付款
+     */
+    @Column(name = "delivery_id")
+    private Long deliveryId;
 
     private static final long serialVersionUID = 1L;
 
@@ -51,6 +63,24 @@ public class PfShoppingCart implements Serializable {
     }
 
     /**
+     * 获取用户主键
+     *
+     * @return user_id - 用户主键
+     */
+    public Long getUserId() {
+        return userId;
+    }
+
+    /**
+     * 设置用户主键
+     *
+     * @param userId 用户主键
+     */
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    /**
      * 获取商品主键
      *
      * @return goods_id - 商品主键
@@ -69,21 +99,21 @@ public class PfShoppingCart implements Serializable {
     }
 
     /**
-     * 获取用户主键
+     * 获取商品名称
      *
-     * @return user_id - 用户主键
+     * @return goods_name - 商品名称
      */
-    public Long getUserId() {
-        return userId;
+    public String getGoodsName() {
+        return goodsName;
     }
 
     /**
-     * 设置用户主键
+     * 设置商品名称
      *
-     * @param userId 用户主键
+     * @param goodsName 商品名称
      */
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName == null ? null : goodsName.trim();
     }
 
     /**
@@ -104,6 +134,24 @@ public class PfShoppingCart implements Serializable {
         this.amount = amount;
     }
 
+    /**
+     * 获取配送单主键 0：表示未付款
+     *
+     * @return delivery_id - 配送单主键 0：表示未付款
+     */
+    public Long getDeliveryId() {
+        return deliveryId;
+    }
+
+    /**
+     * 设置配送单主键 0：表示未付款
+     *
+     * @param deliveryId 配送单主键 0：表示未付款
+     */
+    public void setDeliveryId(Long deliveryId) {
+        this.deliveryId = deliveryId;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -117,9 +165,11 @@ public class PfShoppingCart implements Serializable {
         }
         PfShoppingCart other = (PfShoppingCart) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getGoodsId() == null ? other.getGoodsId() == null : this.getGoodsId().equals(other.getGoodsId()))
             && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
-            && (this.getAmount() == null ? other.getAmount() == null : this.getAmount().equals(other.getAmount()));
+            && (this.getGoodsId() == null ? other.getGoodsId() == null : this.getGoodsId().equals(other.getGoodsId()))
+            && (this.getGoodsName() == null ? other.getGoodsName() == null : this.getGoodsName().equals(other.getGoodsName()))
+            && (this.getAmount() == null ? other.getAmount() == null : this.getAmount().equals(other.getAmount()))
+            && (this.getDeliveryId() == null ? other.getDeliveryId() == null : this.getDeliveryId().equals(other.getDeliveryId()));
     }
 
     @Override
@@ -127,9 +177,11 @@ public class PfShoppingCart implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getGoodsId() == null) ? 0 : getGoodsId().hashCode());
         result = prime * result + ((getUserId() == null) ? 0 : getUserId().hashCode());
+        result = prime * result + ((getGoodsId() == null) ? 0 : getGoodsId().hashCode());
+        result = prime * result + ((getGoodsName() == null) ? 0 : getGoodsName().hashCode());
         result = prime * result + ((getAmount() == null) ? 0 : getAmount().hashCode());
+        result = prime * result + ((getDeliveryId() == null) ? 0 : getDeliveryId().hashCode());
         return result;
     }
 
@@ -140,9 +192,11 @@ public class PfShoppingCart implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", goodsId=").append(goodsId);
         sb.append(", userId=").append(userId);
+        sb.append(", goodsId=").append(goodsId);
+        sb.append(", goodsName=").append(goodsName);
         sb.append(", amount=").append(amount);
+        sb.append(", deliveryId=").append(deliveryId);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

@@ -35,7 +35,7 @@ public class ShoppingListService extends AbstractService<ShopingListVo> {
         long userId = getUserId();
 
         Example pfShoppingCartExample = new Example(PfShoppingCart.class);
-        pfShoppingCartExample.createCriteria().andEqualTo("userId",userId);
+        pfShoppingCartExample.createCriteria().andEqualTo("userId",userId).andEqualTo("deliveryId",0L);
         pfShoppingCartExample.orderBy("id").asc();
 
         List<PfShoppingCart> pfShoppingCartList = pfShoppingCartMapper.selectByExample(pfShoppingCartExample);
