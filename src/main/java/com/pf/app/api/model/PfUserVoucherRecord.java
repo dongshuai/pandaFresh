@@ -24,6 +24,12 @@ public class PfUserVoucherRecord implements Serializable {
     private Long id;
 
     /**
+     * 用户主键
+     */
+    @Column(name = "user_id")
+    private Long userId;
+
+    /**
      * 面值
      */
     private Long amount;
@@ -64,7 +70,7 @@ public class PfUserVoucherRecord implements Serializable {
      * 0：无门槛 10：满十元可用
      */
     @Column(name = "use_condition")
-    private Integer useCondition;
+    private Long useCondition;
 
     private static final long serialVersionUID = 1L;
 
@@ -92,6 +98,23 @@ public class PfUserVoucherRecord implements Serializable {
      */
     public void setId(Long id) {
         this.id = id;
+    }
+
+    /**
+     * 获取用户主键
+     *
+     * @return user_id - 用户主键
+     */
+    public Long getUserId() {
+        return userId;
+    }
+    /**
+     * 设置用户主键
+     *
+     * @param userId 用户主键
+     */
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     /**
@@ -207,7 +230,7 @@ public class PfUserVoucherRecord implements Serializable {
      *
      * @return use_condition - 0：无门槛 10：满十元可用
      */
-    public Integer getUseCondition() {
+    public Long getUseCondition() {
         return useCondition;
     }
 
@@ -216,7 +239,7 @@ public class PfUserVoucherRecord implements Serializable {
      *
      * @param useCondition 0：无门槛 10：满十元可用
      */
-    public void setUseCondition(Integer useCondition) {
+    public void setUseCondition(Long useCondition) {
         this.useCondition = useCondition;
     }
 

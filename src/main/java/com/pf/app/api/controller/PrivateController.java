@@ -14,6 +14,7 @@ import com.pf.app.api.service.AddrListService;
 import com.pf.app.api.service.DeleteShoppingCardService;
 import com.pf.app.api.service.HotSearchListService;
 import com.pf.app.api.service.MessageListService;
+import com.pf.app.api.service.OrderBalancePayService;
 import com.pf.app.api.service.QueryBalanceService;
 import com.pf.app.api.service.RedBagListService;
 import com.pf.app.api.service.ShoppingListService;
@@ -105,6 +106,9 @@ public class PrivateController extends BaseController {
     @Resource
     private VoucherListService voucherListService;
 
+    @Resource
+    private OrderBalancePayService orderBalancePayService;
+
     @PostConstruct
     public void init() {
         commandMap.put("msg-list", messageListService);//消息列表
@@ -117,6 +121,7 @@ public class PrivateController extends BaseController {
         commandMap.put("redbag-list",redBagListService);//红包列表
         commandMap.put("query-balance",queryBalanceService);//用户查询余额
         commandMap.put("voucher-list",voucherListService);//优惠券列表
+        commandMap.put("balance-pay",orderBalancePayService);
     }
 
     @PostMapping("/api/{command}")
@@ -135,19 +140,6 @@ public class PrivateController extends BaseController {
 
         return doResponse(service, vo);
 
-        /*try {
-            return service.execute(vo);
-        } catch (OrderException e) {
-            return new DefaultInterfaceResponse().error(6001, e.getMessage());
-        } catch (UserAccountException e) {
-            return new DefaultInterfaceResponse().error(1010, e.getMessage());
-        } catch (UserVoucherException e){
-            return new DefaultInterfaceResponse().error(1020, e.getMessage());
-        } catch(Exception e) {
-            e.printStackTrace();
-            logger.error("mainController异常："+e);
-            return new DefaultInterfaceResponse().error("system error : [ {} ]", e.getMessage());
-        }*/
     }
 
 }

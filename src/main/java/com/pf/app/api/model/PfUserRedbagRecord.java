@@ -35,7 +35,7 @@ public class PfUserRedbagRecord implements Serializable {
      * 获取途径1：兑换2：好友消费3：用户提现
      */
     @Column(name = "get_way")
-    private String getWay;
+    private Byte getWay;
 
     /**
      * 获取说明
@@ -122,17 +122,17 @@ public class PfUserRedbagRecord implements Serializable {
      *
      * @return get_way - 获取途径1：兑换2：好友消费3：用户提现
      */
-    public String getGetWay() {
+    public Byte getGetWay() {
         return getWay;
     }
 
     /**
      * 设置获取途径1：兑换2：好友消费3：用户提现
      *
-     * @param getWay 获取途径1：兑换2：好友消费3：用户提现
+     * @param getWay 获取途径1：兑换2：好友消费3：用户提现 4:消费
      */
-    public void setGetWay(String getWay) {
-        this.getWay = getWay == null ? null : getWay.trim();
+    public void setGetWay(Byte getWay) {
+        this.getWay = getWay;
     }
 
     /**

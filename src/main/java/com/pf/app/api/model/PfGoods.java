@@ -43,7 +43,7 @@ public class PfGoods implements Serializable {
     private Byte type;
 
     /**
-     * 配送类型1:30分钟达2：次日达3：折扣商品
+     * 配送类型1:30分钟达2：次日达
      */
     @Column(name = "delivery_type")
     private Byte deliveryType;
@@ -77,22 +77,16 @@ public class PfGoods implements Serializable {
     private Long price;
 
     /**
-     * 会员价格 单位：分
+     * 商品价格类型（1：正常价格2：会员价格3：折扣价格4：第二件半价）
      */
-    @Column(name = "member_price")
-    private Long memberPrice;
+    @Column(name = "price_type")
+    private Byte priceType;
 
     /**
-     * 折扣价：单位分
+     * 会员价格 单位：分（正常价格 会员价格 折扣价格 第二件半价）
      */
-    @Column(name = "discount_price")
-    private Long discountPrice;
-
-    /**
-     * 第二件减 单位分
-     */
-    @Column(name = "second_reduce")
-    private Long secondReduce;
+    @Column(name = "real_price")
+    private Long realPrice;
 
     /**
      * 推荐排序,0:不推荐 >0 推荐数字越小越靠前
@@ -195,35 +189,36 @@ public class PfGoods implements Serializable {
     }
 
     /**
-     * 获取商品类型
+     * 获取商品类型1:正常商品2：预售商品3：折扣商品
      *
-     * @return type - 商品类型
+     * @return type - 商品类型1:正常商品2：预售商品3：折扣商品
      */
     public Byte getType() {
         return type;
     }
+
     /**
-     * 设置商品类型
+     * 设置商品类型1:正常商品2：预售商品3：折扣商品
      *
-     * @param type 商品类型
+     * @param type 商品类型1:正常商品2：预售商品3：折扣商品
      */
     public void setType(Byte type) {
         this.type = type;
     }
 
     /**
-     * 获取配送类型1:30分钟达2：次日达3：折扣商品
+     * 获取配送类型1:30分钟达2：次日达
      *
-     * @return delivery_type - 配送类型1:30分钟达2：次日达3：折扣商品
+     * @return delivery_type - 配送类型1:30分钟达2：次日达
      */
     public Byte getDeliveryType() {
         return deliveryType;
     }
 
     /**
-     * 设置配送类型1:30分钟达2：次日达3：折扣商品
+     * 设置配送类型1:30分钟达2：次日达
      *
-     * @param deliveryType 配送类型1:30分钟达2：次日达3：折扣商品
+     * @param deliveryType 配送类型1:30分钟达2：次日达
      */
     public void setDeliveryType(Byte deliveryType) {
         this.deliveryType = deliveryType;
@@ -320,57 +315,39 @@ public class PfGoods implements Serializable {
     }
 
     /**
-     * 获取会员价格 单位：分
+     * 获取商品价格类型（1：正常价格2：会员价格3：折扣价格4：第二件半价）
      *
-     * @return member_price - 会员价格 单位：分
+     * @return price_type - 商品价格类型（1：正常价格2：会员价格3：折扣价格4：第二件半价）
      */
-    public Long getMemberPrice() {
-        return memberPrice;
+    public Byte getPriceType() {
+        return priceType;
     }
 
     /**
-     * 设置会员价格 单位：分
+     * 设置商品价格类型（1：正常价格2：会员价格3：折扣价格4：第二件半价）
      *
-     * @param memberPrice 会员价格 单位：分
+     * @param priceType 商品价格类型（1：正常价格2：会员价格3：折扣价格4：第二件半价）
      */
-    public void setMemberPrice(Long memberPrice) {
-        this.memberPrice = memberPrice;
+    public void setPriceType(Byte priceType) {
+        this.priceType = priceType;
     }
 
     /**
-     * 获取折扣价：单位分
+     * 获取会员价格 单位：分（正常价格 会员价格 折扣价格 第二件半价）
      *
-     * @return discount_price - 折扣价：单位分
+     * @return real_price - 会员价格 单位：分（正常价格 会员价格 折扣价格 第二件半价）
      */
-    public Long getDiscountPrice() {
-        return discountPrice;
+    public Long getRealPrice() {
+        return realPrice;
     }
 
     /**
-     * 设置折扣价：单位分
+     * 设置会员价格 单位：分（正常价格 会员价格 折扣价格 第二件半价）
      *
-     * @param discountPrice 折扣价：单位分
+     * @param realPrice 会员价格 单位：分（正常价格 会员价格 折扣价格 第二件半价）
      */
-    public void setDiscountPrice(Long discountPrice) {
-        this.discountPrice = discountPrice;
-    }
-
-    /**
-     * 获取第二件减 单位分
-     *
-     * @return second_reduce - 第二件减 单位分
-     */
-    public Long getSecondReduce() {
-        return secondReduce;
-    }
-
-    /**
-     * 设置第二件减 单位分
-     *
-     * @param secondReduce 第二件减 单位分
-     */
-    public void setSecondReduce(Long secondReduce) {
-        this.secondReduce = secondReduce;
+    public void setRealPrice(Long realPrice) {
+        this.realPrice = realPrice;
     }
 
     /**
@@ -443,15 +420,15 @@ public class PfGoods implements Serializable {
             && (this.getCategoryId() == null ? other.getCategoryId() == null : this.getCategoryId().equals(other.getCategoryId()))
             && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
             && (this.getDescription() == null ? other.getDescription() == null : this.getDescription().equals(other.getDescription()))
+            && (this.getType() == null ? other.getType() == null : this.getType().equals(other.getType()))
             && (this.getDeliveryType() == null ? other.getDeliveryType() == null : this.getDeliveryType().equals(other.getDeliveryType()))
             && (this.getOrderSeq() == null ? other.getOrderSeq() == null : this.getOrderSeq().equals(other.getOrderSeq()))
             && (this.getSaleFlag() == null ? other.getSaleFlag() == null : this.getSaleFlag().equals(other.getSaleFlag()))
             && (this.getDetailUrl() == null ? other.getDetailUrl() == null : this.getDetailUrl().equals(other.getDetailUrl()))
             && (this.getCity() == null ? other.getCity() == null : this.getCity().equals(other.getCity()))
             && (this.getPrice() == null ? other.getPrice() == null : this.getPrice().equals(other.getPrice()))
-            && (this.getMemberPrice() == null ? other.getMemberPrice() == null : this.getMemberPrice().equals(other.getMemberPrice()))
-            && (this.getDiscountPrice() == null ? other.getDiscountPrice() == null : this.getDiscountPrice().equals(other.getDiscountPrice()))
-            && (this.getSecondReduce() == null ? other.getSecondReduce() == null : this.getSecondReduce().equals(other.getSecondReduce()))
+            && (this.getPriceType() == null ? other.getPriceType() == null : this.getPriceType().equals(other.getPriceType()))
+            && (this.getRealPrice() == null ? other.getRealPrice() == null : this.getRealPrice().equals(other.getRealPrice()))
             && (this.getRecommendSeq() == null ? other.getRecommendSeq() == null : this.getRecommendSeq().equals(other.getRecommendSeq()))
             && (this.getBerserkSeq() == null ? other.getBerserkSeq() == null : this.getBerserkSeq().equals(other.getBerserkSeq()))
             && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()));
@@ -465,15 +442,15 @@ public class PfGoods implements Serializable {
         result = prime * result + ((getCategoryId() == null) ? 0 : getCategoryId().hashCode());
         result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
         result = prime * result + ((getDescription() == null) ? 0 : getDescription().hashCode());
+        result = prime * result + ((getType() == null) ? 0 : getType().hashCode());
         result = prime * result + ((getDeliveryType() == null) ? 0 : getDeliveryType().hashCode());
         result = prime * result + ((getOrderSeq() == null) ? 0 : getOrderSeq().hashCode());
         result = prime * result + ((getSaleFlag() == null) ? 0 : getSaleFlag().hashCode());
         result = prime * result + ((getDetailUrl() == null) ? 0 : getDetailUrl().hashCode());
         result = prime * result + ((getCity() == null) ? 0 : getCity().hashCode());
         result = prime * result + ((getPrice() == null) ? 0 : getPrice().hashCode());
-        result = prime * result + ((getMemberPrice() == null) ? 0 : getMemberPrice().hashCode());
-        result = prime * result + ((getDiscountPrice() == null) ? 0 : getDiscountPrice().hashCode());
-        result = prime * result + ((getSecondReduce() == null) ? 0 : getSecondReduce().hashCode());
+        result = prime * result + ((getPriceType() == null) ? 0 : getPriceType().hashCode());
+        result = prime * result + ((getRealPrice() == null) ? 0 : getRealPrice().hashCode());
         result = prime * result + ((getRecommendSeq() == null) ? 0 : getRecommendSeq().hashCode());
         result = prime * result + ((getBerserkSeq() == null) ? 0 : getBerserkSeq().hashCode());
         result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
@@ -490,15 +467,15 @@ public class PfGoods implements Serializable {
         sb.append(", categoryId=").append(categoryId);
         sb.append(", name=").append(name);
         sb.append(", description=").append(description);
+        sb.append(", type=").append(type);
         sb.append(", deliveryType=").append(deliveryType);
         sb.append(", orderSeq=").append(orderSeq);
         sb.append(", saleFlag=").append(saleFlag);
         sb.append(", detailUrl=").append(detailUrl);
         sb.append(", city=").append(city);
         sb.append(", price=").append(price);
-        sb.append(", memberPrice=").append(memberPrice);
-        sb.append(", discountPrice=").append(discountPrice);
-        sb.append(", secondReduce=").append(secondReduce);
+        sb.append(", priceType=").append(priceType);
+        sb.append(", realPrice=").append(realPrice);
         sb.append(", recommendSeq=").append(recommendSeq);
         sb.append(", berserkSeq=").append(berserkSeq);
         sb.append(", createTime=").append(createTime);

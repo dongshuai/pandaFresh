@@ -42,6 +42,12 @@ public class PfShoppingCart implements Serializable {
     @Column(name = "delivery_id")
     private Long deliveryId;
 
+    /**
+     * 配送类型1:30分钟达2：次日达
+     */
+    @Column(name = "delivery_type")
+    private Byte deliveryType;
+
     private static final long serialVersionUID = 1L;
 
     /**
@@ -150,6 +156,24 @@ public class PfShoppingCart implements Serializable {
      */
     public void setDeliveryId(Long deliveryId) {
         this.deliveryId = deliveryId;
+    }
+
+    /**
+     * 获取配送单类型:30分钟达2：次日达
+     *
+     * @return deliveryType - 配送单主键 0：表示未付款
+     */
+
+    public Byte getDeliveryType() {
+        return deliveryType;
+    }
+    /**
+     * 设置配送单类型:30分钟达2：次日达
+     *
+     * @param deliveryType 配送单主键 0：表示未付款
+     */
+    public void setDeliveryType(Byte deliveryType) {
+        this.deliveryType = deliveryType;
     }
 
     @Override

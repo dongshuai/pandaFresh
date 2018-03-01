@@ -38,6 +38,12 @@ public class PfOrder implements Serializable {
     private Long amount;
 
     /**
+     * 订单实际支付金额
+     */
+    @Column(name = "real_amount")
+    private Long realAmount;
+
+    /**
      * 运费 单位：分
      */
     @Column(name = "deliver_fee")
@@ -47,7 +53,7 @@ public class PfOrder implements Serializable {
      * 支付类型：1：支付宝，2：微信，3，余额
      */
     @Column(name = "pay_type")
-    private String payType;
+    private Byte payType;
 
     /**
      * 红包 单位：分
@@ -55,9 +61,15 @@ public class PfOrder implements Serializable {
     private Long redbag;
 
     /**
+     * 优惠券主键
+     */
+    @Column(name = "voucher_id")
+    private Long voucherId;
+
+    /**
      * 优惠券 单位：分
      */
-    private Long coupon;
+    private Long voucher;
 
     /**
      * 订单创建时间
@@ -176,6 +188,24 @@ public class PfOrder implements Serializable {
     }
 
     /**
+     * 获取订单实际支付金额
+     *
+     * @return real_amount - 订单实际支付金额
+     */
+    public Long getRealAmount() {
+        return realAmount;
+    }
+
+    /**
+     * 设置订单实际支付金额
+     *
+     * @param realAmount 订单实际支付金额
+     */
+    public void setRealAmount(Long realAmount) {
+        this.realAmount = realAmount;
+    }
+
+    /**
      * 获取运费 单位：分
      *
      * @return deliver_fee - 运费 单位：分
@@ -198,7 +228,7 @@ public class PfOrder implements Serializable {
      *
      * @return pay_type - 支付类型：1：支付宝，2：微信，3，余额
      */
-    public String getPayType() {
+    public Byte getPayType() {
         return payType;
     }
 
@@ -207,8 +237,8 @@ public class PfOrder implements Serializable {
      *
      * @param payType 支付类型：1：支付宝，2：微信，3，余额
      */
-    public void setPayType(String payType) {
-        this.payType = payType == null ? null : payType.trim();
+    public void setPayType(Byte payType) {
+        this.payType = payType;
     }
 
     /**
@@ -230,21 +260,39 @@ public class PfOrder implements Serializable {
     }
 
     /**
+     * 获取优惠券主键
+     *
+     * @return voucher_id - 优惠券主键
+     */
+    public Long getVoucherId() {
+        return voucherId;
+    }
+
+    /**
+     * 设置优惠券主键
+     *
+     * @param voucherId 优惠券主键
+     */
+    public void setVoucherId(Long voucherId) {
+        this.voucherId = voucherId;
+    }
+
+    /**
      * 获取优惠券 单位：分
      *
-     * @return coupon - 优惠券 单位：分
+     * @return voucher - 优惠券 单位：分
      */
-    public Long getCoupon() {
-        return coupon;
+    public Long getVoucher() {
+        return voucher;
     }
 
     /**
      * 设置优惠券 单位：分
      *
-     * @param coupon 优惠券 单位：分
+     * @param voucher 优惠券 单位：分
      */
-    public void setCoupon(Long coupon) {
-        this.coupon = coupon;
+    public void setVoucher(Long voucher) {
+        this.voucher = voucher;
     }
 
     /**
@@ -336,10 +384,12 @@ public class PfOrder implements Serializable {
             && (this.getOrderNum() == null ? other.getOrderNum() == null : this.getOrderNum().equals(other.getOrderNum()))
             && (this.getDealStream() == null ? other.getDealStream() == null : this.getDealStream().equals(other.getDealStream()))
             && (this.getAmount() == null ? other.getAmount() == null : this.getAmount().equals(other.getAmount()))
+            && (this.getRealAmount() == null ? other.getRealAmount() == null : this.getRealAmount().equals(other.getRealAmount()))
             && (this.getDeliverFee() == null ? other.getDeliverFee() == null : this.getDeliverFee().equals(other.getDeliverFee()))
             && (this.getPayType() == null ? other.getPayType() == null : this.getPayType().equals(other.getPayType()))
             && (this.getRedbag() == null ? other.getRedbag() == null : this.getRedbag().equals(other.getRedbag()))
-            && (this.getCoupon() == null ? other.getCoupon() == null : this.getCoupon().equals(other.getCoupon()))
+            && (this.getVoucherId() == null ? other.getVoucherId() == null : this.getVoucherId().equals(other.getVoucherId()))
+            && (this.getVoucher() == null ? other.getVoucher() == null : this.getVoucher().equals(other.getVoucher()))
             && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
             && (this.getPayTime() == null ? other.getPayTime() == null : this.getPayTime().equals(other.getPayTime()))
             && (this.getBillFlag() == null ? other.getBillFlag() == null : this.getBillFlag().equals(other.getBillFlag()))
@@ -355,10 +405,12 @@ public class PfOrder implements Serializable {
         result = prime * result + ((getOrderNum() == null) ? 0 : getOrderNum().hashCode());
         result = prime * result + ((getDealStream() == null) ? 0 : getDealStream().hashCode());
         result = prime * result + ((getAmount() == null) ? 0 : getAmount().hashCode());
+        result = prime * result + ((getRealAmount() == null) ? 0 : getRealAmount().hashCode());
         result = prime * result + ((getDeliverFee() == null) ? 0 : getDeliverFee().hashCode());
         result = prime * result + ((getPayType() == null) ? 0 : getPayType().hashCode());
         result = prime * result + ((getRedbag() == null) ? 0 : getRedbag().hashCode());
-        result = prime * result + ((getCoupon() == null) ? 0 : getCoupon().hashCode());
+        result = prime * result + ((getVoucherId() == null) ? 0 : getVoucherId().hashCode());
+        result = prime * result + ((getVoucher() == null) ? 0 : getVoucher().hashCode());
         result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
         result = prime * result + ((getPayTime() == null) ? 0 : getPayTime().hashCode());
         result = prime * result + ((getBillFlag() == null) ? 0 : getBillFlag().hashCode());
@@ -377,10 +429,12 @@ public class PfOrder implements Serializable {
         sb.append(", orderNum=").append(orderNum);
         sb.append(", dealStream=").append(dealStream);
         sb.append(", amount=").append(amount);
+        sb.append(", realAmount=").append(realAmount);
         sb.append(", deliverFee=").append(deliverFee);
         sb.append(", payType=").append(payType);
         sb.append(", redbag=").append(redbag);
-        sb.append(", coupon=").append(coupon);
+        sb.append(", voucherId=").append(voucherId);
+        sb.append(", voucher=").append(voucher);
         sb.append(", createTime=").append(createTime);
         sb.append(", payTime=").append(payTime);
         sb.append(", billFlag=").append(billFlag);

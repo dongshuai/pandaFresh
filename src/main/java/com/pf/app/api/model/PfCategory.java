@@ -1,5 +1,6 @@
 package com.pf.app.api.model;
 
+import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
@@ -26,6 +27,12 @@ public class PfCategory implements Serializable {
      * 顺序
      */
     private Integer seq;
+
+    /**
+     * 图片url地址
+     */
+    @Column(name = "pic_url")
+    private String picUrl;
 
     private static final long serialVersionUID = 1L;
 
@@ -101,6 +108,22 @@ public class PfCategory implements Serializable {
         this.seq = seq;
     }
 
+    /**
+     * 获取图片url
+     *
+     * @return picUrl 图片url
+     */
+    public String getPicUrl() {
+        return picUrl;
+    }
+    /**
+     * 设置图片url
+     *
+     * @param picUrl 图片url
+     */
+    public void setPicUrl(String picUrl) {
+        this.picUrl = picUrl;
+    }
     @Override
     public boolean equals(Object that) {
         if (this == that) {

@@ -72,6 +72,7 @@ public class AddShoppingCardService extends AbstractService<ShoppingCardVo> {
             pfShoppingCart.setUserId(userId);
             pfShoppingCart.setGoodsId(goodsId);
             pfShoppingCart.setGoodsName(pfGoods.getName());
+            pfShoppingCart.setDeliveryType(pfGoods.getDeliveryType());
             pfShoppingCart.setAmount(amount);
             pfShoppingCart.setId(IdWorkerFactory.getIdWorker().nextId());
             pfShoppingCartMapper.insertSelective(pfShoppingCart);
