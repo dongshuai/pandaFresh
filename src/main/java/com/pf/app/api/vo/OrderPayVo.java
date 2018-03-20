@@ -2,6 +2,10 @@ package com.pf.app.api.vo;
 
 public class OrderPayVo implements VO {
     /**
+     * 支付密码
+     */
+    private String password;
+    /**
      * 商品主键字符串 格式 goodsId,goodsId
      */
     private String goodsIds;
@@ -40,6 +44,13 @@ public class OrderPayVo implements VO {
      */
     private String preSaleArrivalTime;
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public String getGoodsIds() {
         return goodsIds;

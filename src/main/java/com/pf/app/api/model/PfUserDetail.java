@@ -4,7 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
-import java.util.Date;
 
 @Table(name = "pf_user_detail")
 public class PfUserDetail implements Serializable {
@@ -22,10 +21,10 @@ public class PfUserDetail implements Serializable {
     private String payPwd;
 
     /**
-     * 用户会员结束日期
+     * 是否可以提现0:不可以1：可以
      */
-    @Column(name = "member_end_date")
-    private Date memberEndDate;
+    @Column(name = "can_cash")
+    private Boolean canCash;
 
     private static final long serialVersionUID = 1L;
 
@@ -66,21 +65,21 @@ public class PfUserDetail implements Serializable {
     }
 
     /**
-     * 获取用户会员结束日期
+     * 获取是否可以提现0:不可以1：可以
      *
-     * @return member_end_date - 用户会员结束日期
+     * @return can_cash - 是否可以提现0:不可以1：可以
      */
-    public Date getMemberEndDate() {
-        return memberEndDate;
+    public Boolean getCanCash() {
+        return canCash;
     }
 
     /**
-     * 设置用户会员结束日期
+     * 设置是否可以提现0:不可以1：可以
      *
-     * @param memberEndDate 用户会员结束日期
+     * @param canCash 是否可以提现0:不可以1：可以
      */
-    public void setMemberEndDate(Date memberEndDate) {
-        this.memberEndDate = memberEndDate;
+    public void setCanCash(Boolean canCash) {
+        this.canCash = canCash;
     }
 
     @Override
@@ -97,7 +96,7 @@ public class PfUserDetail implements Serializable {
         PfUserDetail other = (PfUserDetail) that;
         return (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
             && (this.getPayPwd() == null ? other.getPayPwd() == null : this.getPayPwd().equals(other.getPayPwd()))
-            && (this.getMemberEndDate() == null ? other.getMemberEndDate() == null : this.getMemberEndDate().equals(other.getMemberEndDate()));
+            && (this.getCanCash() == null ? other.getCanCash() == null : this.getCanCash().equals(other.getCanCash()));
     }
 
     @Override
@@ -106,7 +105,7 @@ public class PfUserDetail implements Serializable {
         int result = 1;
         result = prime * result + ((getUserId() == null) ? 0 : getUserId().hashCode());
         result = prime * result + ((getPayPwd() == null) ? 0 : getPayPwd().hashCode());
-        result = prime * result + ((getMemberEndDate() == null) ? 0 : getMemberEndDate().hashCode());
+        result = prime * result + ((getCanCash() == null) ? 0 : getCanCash().hashCode());
         return result;
     }
 
@@ -118,7 +117,7 @@ public class PfUserDetail implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", userId=").append(userId);
         sb.append(", payPwd=").append(payPwd);
-        sb.append(", memberEndDate=").append(memberEndDate);
+        sb.append(", canCash=").append(canCash);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

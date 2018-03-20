@@ -2,6 +2,7 @@ package com.pf.app.api.service;
 
 import com.pf.app.api.mapper.PfPhoneCodeMapper;
 import com.pf.app.api.mapper.PfUserBalanceMapper;
+import com.pf.app.api.mapper.PfUserDetailMapper;
 import com.pf.app.api.mapper.PfUserLoginExpMapper;
 import com.pf.app.api.mapper.PfUserMapper;
 import com.pf.app.api.mapper.PfUserRedbagMapper;
@@ -9,6 +10,7 @@ import com.pf.app.api.mapper.PfUserVoucherMapper;
 import com.pf.app.api.model.PfPhoneCode;
 import com.pf.app.api.model.PfUser;
 import com.pf.app.api.model.PfUserBalance;
+import com.pf.app.api.model.PfUserDetail;
 import com.pf.app.api.model.PfUserRedbag;
 import com.pf.app.api.model.PfUserVoucher;
 import com.pf.app.api.proxy.InterfaceResponse;
@@ -44,6 +46,8 @@ public class LoginService extends AbstractService<LoginVo> {
     private PfUserVoucherMapper pfUserVoucherMapper;
     @Resource
     private PfPhoneCodeMapper pfPhoneCodeMapper;
+    @Resource
+    private PfUserDetailMapper pfUserDetailMapper;
 
     @Override
     public InterfaceResponse check(LoginVo vo) {
@@ -146,6 +150,13 @@ public class LoginService extends AbstractService<LoginVo> {
         pfUser.setRecommendUserId(recommendUserId);
         //保存用户信息
         pfUserMapper.insertSelective(pfUser);
+
+
+        PfUserDetail pfUserDetail = new PfUserDetail();
+        pfUserDetail.setUserId(userId);
+        pfUserDetail.setCanCash(false);
+
+        pfUserDetailMapper.insert(pfUserDetail);
 
         PfUserBalance pfUserBalance = new PfUserBalance();
         pfUserBalance.setUserId(userId);

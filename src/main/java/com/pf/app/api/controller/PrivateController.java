@@ -17,6 +17,7 @@ import com.pf.app.api.service.MessageListService;
 import com.pf.app.api.service.OrderBalancePayService;
 import com.pf.app.api.service.QueryBalanceService;
 import com.pf.app.api.service.RedBagListService;
+import com.pf.app.api.service.SetPayPasswordService;
 import com.pf.app.api.service.ShoppingListService;
 import com.pf.app.api.service.UpdateShoppingCardService;
 import com.pf.app.api.service.VoucherListService;
@@ -105,9 +106,17 @@ public class PrivateController extends BaseController {
      */
     @Resource
     private VoucherListService voucherListService;
-
+    /**
+     *余额购买订单
+     */
     @Resource
     private OrderBalancePayService orderBalancePayService;
+
+    /**
+     * 设置余额支付密码
+     */
+    @Resource
+    private SetPayPasswordService setPayPasswordService;
 
     @PostConstruct
     public void init() {
@@ -121,7 +130,8 @@ public class PrivateController extends BaseController {
         commandMap.put("redbag-list",redBagListService);//红包列表
         commandMap.put("query-balance",queryBalanceService);//用户查询余额
         commandMap.put("voucher-list",voucherListService);//优惠券列表
-        commandMap.put("balance-pay",orderBalancePayService);
+        commandMap.put("balance-pay",orderBalancePayService);//余额提交订单
+        commandMap.put("set-pay-password",setPayPasswordService);//设置余额支付密码
     }
 
     @PostMapping("/api/{command}")

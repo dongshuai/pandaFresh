@@ -7,6 +7,7 @@ import com.pf.app.api.mapper.PfOrderMapper;
 import com.pf.app.api.mapper.PfShoppingCartMapper;
 import com.pf.app.api.mapper.PfSysConfMapper;
 import com.pf.app.api.mapper.PfUserBalanceMapper;
+import com.pf.app.api.mapper.PfUserDetailMapper;
 import com.pf.app.api.mapper.PfUserMapper;
 import com.pf.app.api.mapper.PfUserRedbagMapper;
 import com.pf.app.api.mapper.PfUserRedbagRecordMapper;
@@ -19,6 +20,7 @@ import com.pf.app.api.model.PfShoppingCart;
 import com.pf.app.api.model.PfSysConf;
 import com.pf.app.api.model.PfUser;
 import com.pf.app.api.model.PfUserBalance;
+import com.pf.app.api.model.PfUserDetail;
 import com.pf.app.api.model.PfUserRedbag;
 import com.pf.app.api.model.PfUserRedbagRecord;
 import com.pf.app.api.model.PfUserVoucher;
@@ -70,11 +72,18 @@ public class OrderBalancePayService extends AbstractService<OrderPayVo> {
     private PfShoppingCartMapper pfShoppingCartMapper;
     @Autowired
     private PfDeliveryMapper pfDeliveryMapper;
+    @Autowired
+    private PfUserDetailMapper pfUserDetailMapper;
 
 
     @Override
     public InterfaceResponse check(OrderPayVo vo) {
         logger.info("订单支付检查参数开始，提交信息：{}", vo);
+
+        if(StringUtils.isBlank(vo.getPassword())){
+            return error(8100, "支付密码不能为空");
+        }
+
         if (null == vo.getGoodsIds()) {
             return error(8100, "商品信息不能为空");
         }
@@ -96,6 +105,26 @@ public class OrderBalancePayService extends AbstractService<OrderPayVo> {
         Date memberEndDate = pfUser.getMemberEndDate();
 
         Long deliverFee = vo.getDeliverFee()==null  ?  0L : vo.getDeliverFee();
+
+        PfUserDetail pfUserDetail = pfUserDetailMapper.selectByPrimaryKey(userId);
+        if(pfUserDetail == null){
+            logger.debug("用户没有设置支付密码，不能购买");
+            throw new OrderException("用户没有设置支付密码");
+        }
+        String payPwd = pfUserDetail.getPayPwd();
+
+        if(payPwd == null){
+            logger.debug("用户没有设置支付密码，不能购买");
+            throw new OrderException("用户没有设置支付密码");
+        }
+
+        if(!StringUtils.equals(payPwd,vo.getPassword())){
+            logger.debug("密码错误");
+            throw new OrderException("密码错误");
+        }
+
+
+        pfUserDetail.getPayPwd();
 
         Boolean isMember = false;
         if(memberEndDate != null ){
