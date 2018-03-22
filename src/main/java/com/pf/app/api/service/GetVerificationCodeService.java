@@ -3,6 +3,7 @@ package com.pf.app.api.service;
 import com.pf.app.api.mapper.PfPhoneCodeMapper;
 import com.pf.app.api.model.PfPhoneCode;
 import com.pf.app.api.proxy.InterfaceResponse;
+import com.pf.app.api.util.MsgUtil;
 import com.pf.app.api.util.RandomNumUtil;
 import com.pf.app.api.util.ValidatorUtil;
 import com.pf.app.api.vo.GetVerificationCodeVo;
@@ -69,6 +70,7 @@ public class GetVerificationCodeService extends AbstractService<GetVerificationC
             }
         }
         //调用阿里大鱼短信接口
+        MsgUtil.sendLoginMsgCode(phoneNum,code);
         logger.debug("手机验证码：{}",code);
         logger.info("发送验证码结束");
 

@@ -24,7 +24,7 @@ public class RandomNumUtil {
     }
 
     public static String get6RandNum(){
-        return getRandNum(1,99999)+"";
+        return getRandNum(1,999999)+"";
     }
 
     public static void main(String [] args){

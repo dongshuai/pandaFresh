@@ -1,7 +1,5 @@
 package com.pf.app.api.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -28,7 +26,7 @@ public class PfMassage implements Serializable {
     private Long userId;
 
     /**
-     * 内容
+     * 描述
      */
     private String content;
 
@@ -36,8 +34,24 @@ public class PfMassage implements Serializable {
      * 发送时间
      */
     @Column(name = "create_time")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date createTime;
+
+    /**
+     * 标题
+     */
+    private String title;
+
+    /**
+     * 图片url
+     */
+    @Column(name = "pic_url")
+    private String picUrl;
+
+    /**
+     * 详细页面h5地址
+     */
+    @Column(name = "detail_h5_url")
+    private String detailH5Url;
 
     private static final long serialVersionUID = 1L;
 
@@ -96,18 +110,18 @@ public class PfMassage implements Serializable {
     }
 
     /**
-     * 获取内容
+     * 获取描述
      *
-     * @return content - 内容
+     * @return content - 描述
      */
     public String getContent() {
         return content;
     }
 
     /**
-     * 设置内容
+     * 设置描述
      *
-     * @param content 内容
+     * @param content 描述
      */
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
@@ -131,6 +145,60 @@ public class PfMassage implements Serializable {
         this.createTime = createTime;
     }
 
+    /**
+     * 获取标题
+     *
+     * @return title - 标题
+     */
+    public String getTitle() {
+        return title;
+    }
+
+    /**
+     * 设置标题
+     *
+     * @param title 标题
+     */
+    public void setTitle(String title) {
+        this.title = title == null ? null : title.trim();
+    }
+
+    /**
+     * 获取图片url
+     *
+     * @return pic_url - 图片url
+     */
+    public String getPicUrl() {
+        return picUrl;
+    }
+
+    /**
+     * 设置图片url
+     *
+     * @param picUrl 图片url
+     */
+    public void setPicUrl(String picUrl) {
+        this.picUrl = picUrl == null ? null : picUrl.trim();
+    }
+
+    /**
+     * 获取详细页面h5地址
+     *
+     * @return detail_h5_url - 详细页面h5地址
+     */
+    public String getDetailH5Url() {
+        return detailH5Url;
+    }
+
+    /**
+     * 设置详细页面h5地址
+     *
+     * @param detailH5Url 详细页面h5地址
+     */
+    public void setDetailH5Url(String detailH5Url) {
+        this.detailH5Url = detailH5Url == null ? null : detailH5Url.trim();
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -147,7 +215,10 @@ public class PfMassage implements Serializable {
             && (this.getType() == null ? other.getType() == null : this.getType().equals(other.getType()))
             && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
             && (this.getContent() == null ? other.getContent() == null : this.getContent().equals(other.getContent()))
-            && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()));
+            && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
+            && (this.getTitle() == null ? other.getTitle() == null : this.getTitle().equals(other.getTitle()))
+            && (this.getPicUrl() == null ? other.getPicUrl() == null : this.getPicUrl().equals(other.getPicUrl()))
+            && (this.getDetailH5Url() == null ? other.getDetailH5Url() == null : this.getDetailH5Url().equals(other.getDetailH5Url()));
     }
 
     @Override
@@ -159,6 +230,9 @@ public class PfMassage implements Serializable {
         result = prime * result + ((getUserId() == null) ? 0 : getUserId().hashCode());
         result = prime * result + ((getContent() == null) ? 0 : getContent().hashCode());
         result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
+        result = prime * result + ((getTitle() == null) ? 0 : getTitle().hashCode());
+        result = prime * result + ((getPicUrl() == null) ? 0 : getPicUrl().hashCode());
+        result = prime * result + ((getDetailH5Url() == null) ? 0 : getDetailH5Url().hashCode());
         return result;
     }
 
@@ -173,6 +247,9 @@ public class PfMassage implements Serializable {
         sb.append(", userId=").append(userId);
         sb.append(", content=").append(content);
         sb.append(", createTime=").append(createTime);
+        sb.append(", title=").append(title);
+        sb.append(", picUrl=").append(picUrl);
+        sb.append(", detailH5Url=").append(detailH5Url);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
