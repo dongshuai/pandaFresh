@@ -7,6 +7,8 @@ public class ThirdPartyBindVo implements VO {
 	private String phoneNum;
 	private String verificationCode;
 	private Long recommendUserId;
+	private String pushToken;
+	private String device;
 
 
     /** 用户ID，微博和QQ有值 */
@@ -116,14 +118,44 @@ public class ThirdPartyBindVo implements VO {
 		this.type = type;
 	}
 
-	@Override
-	public String toString() {
-		return "UserOtherVo [uid=" + uid + ", openid=" + openid + ", unionid=" + unionid
-				+ ", userName=" + userName + ", accessToken=" + accessToken + ", refreshToken=" + refreshToken
-				+ ", expiresIn=" + expiresIn + ", iconUrl=" + iconUrl + ", createTime=" + createTime + ", type="
-				+ type +  "]";
+	public String getPushToken() {
+		return pushToken;
 	}
 
-    
-    
+	public void setPushToken(String pushToken) {
+		this.pushToken = pushToken;
+	}
+
+	public String getDevice() {
+		return device;
+	}
+
+	public void setDevice(String device) {
+		this.device = device;
+	}
+
+	//授权过查询用户信息
+
+
+	@Override
+	public String toString() {
+		final StringBuffer sb = new StringBuffer("ThirdPartyBindVo{");
+		sb.append("phoneNum='").append(phoneNum).append('\'');
+		sb.append(", verificationCode='").append(verificationCode).append('\'');
+		sb.append(", recommendUserId=").append(recommendUserId);
+		sb.append(", pushToken='").append(pushToken).append('\'');
+		sb.append(", device='").append(device).append('\'');
+		sb.append(", uid='").append(uid).append('\'');
+		sb.append(", openid='").append(openid).append('\'');
+		sb.append(", unionid='").append(unionid).append('\'');
+		sb.append(", userName='").append(userName).append('\'');
+		sb.append(", accessToken='").append(accessToken).append('\'');
+		sb.append(", refreshToken='").append(refreshToken).append('\'');
+		sb.append(", expiresIn='").append(expiresIn).append('\'');
+		sb.append(", iconUrl='").append(iconUrl).append('\'');
+		sb.append(", createTime=").append(createTime);
+		sb.append(", type=").append(type);
+		sb.append('}');
+		return sb.toString();
+	}
 }

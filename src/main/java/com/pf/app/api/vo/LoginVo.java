@@ -4,6 +4,8 @@ public class LoginVo implements VO {
     private String phoneNum;
     private String verificationCode;
     private Long recommendUserId;
+    private String device;
+    private String pushToken;
 
     public String getPhoneNum() {
         return phoneNum;
@@ -29,12 +31,31 @@ public class LoginVo implements VO {
         this.recommendUserId = recommendUserId;
     }
 
+    public String getDevice() {
+        return device;
+    }
+
+    public void setDevice(String device) {
+        this.device = device;
+    }
+
+    public String getPushToken() {
+        return pushToken;
+    }
+
+    public void setPushToken(String pushToken) {
+        this.pushToken = pushToken;
+    }
+
     @Override
     public String toString() {
-        return "LoginVo{" +
-                "phoneNum='" + phoneNum + '\'' +
-                ", verificationCode='" + verificationCode + '\'' +
-                ", recommendUserId=" + recommendUserId +
-                '}';
+        final StringBuffer sb = new StringBuffer("LoginVo{");
+        sb.append("phoneNum='").append(phoneNum).append('\'');
+        sb.append(", verificationCode='").append(verificationCode).append('\'');
+        sb.append(", recommendUserId=").append(recommendUserId);
+        sb.append(", device='").append(device).append('\'');
+        sb.append(", pushToken='").append(pushToken).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }

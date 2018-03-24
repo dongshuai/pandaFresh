@@ -1,6 +1,7 @@
 package com.pf.app.api.util;
 
 import java.util.Calendar;
+import java.util.Random;
 
 public class RandomNumUtil {
     /**
@@ -24,7 +25,12 @@ public class RandomNumUtil {
     }
 
     public static String get6RandNum(){
-        return getRandNum(1,999999)+"";
+
+        Integer number = new Random().nextInt(1000000);
+        String code = "000000" + Integer.toString(number);
+        return code.substring(code.length() - 6);
+
+        //return getRandNum(1,999999)+"";
     }
 
     public static void main(String [] args){

@@ -179,10 +179,13 @@ public class ThirdPartyBindService extends AbstractService<ThirdPartyBindVo> {
         Date regTime = new Date();
         PfUser pfUser = new PfUser();
         pfUser.setId(userId);
-        pfUser.setNickname(phoneNum);
+        pfUser.setNickname(vo.getUserName());
         pfUser.setPhoneNum(phoneNum);
         pfUser.setRegTime(new Date());
         pfUser.setRecommendUserId(recommendUserId);
+        pfUser.setPicUrl(vo.getIconUrl());
+        pfUser.setPushToken(vo.getPushToken());
+        pfUser.setDevice(new Byte(vo.getDevice()));
         //保存用户信息
         pfUserMapper.insertSelective(pfUser);
 

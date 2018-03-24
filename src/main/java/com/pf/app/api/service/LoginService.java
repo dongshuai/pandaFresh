@@ -60,6 +60,12 @@ public class LoginService extends AbstractService<LoginVo> {
         if(StringUtils.isBlank(vo.getVerificationCode())){
             return error(1000,"验证码错误");
         }
+        if(StringUtils.isBlank(vo.getPushToken())){
+            return error(1000,"推送令牌为空");
+        }
+        if(StringUtils.isBlank(vo.getDevice())){
+            return error(1000,"登录设备为空");
+        }
 
         logger.info("用户登录参数验证结束");
         return null;
@@ -148,6 +154,10 @@ public class LoginService extends AbstractService<LoginVo> {
         pfUser.setPhoneNum(phoneNum);
         pfUser.setRegTime(new Date());
         pfUser.setRecommendUserId(recommendUserId);
+
+        pfUser.setDevice(new Byte(vo.getDevice()));
+        pfUser.setPushToken(vo.getPushToken());
+
         //保存用户信息
         pfUserMapper.insertSelective(pfUser);
 

@@ -55,6 +55,17 @@ public class PfUser implements Serializable {
     @Column(name = "member_end_date")
     private Date memberEndDate;
 
+    /**
+     * 推送令牌
+     */
+    @Column(name = "push_token")
+    private String pushToken;
+
+    /**
+     * 注册来源
+     */
+    private Byte device;
+
     private static final long serialVersionUID = 1L;
 
     public Boolean getMember() {
@@ -191,6 +202,42 @@ public class PfUser implements Serializable {
         this.memberEndDate = memberEndDate;
     }
 
+    /**
+     * 获取推送令牌
+     *
+     * @return push_token - 推送令牌
+     */
+    public String getPushToken() {
+        return pushToken;
+    }
+
+    /**
+     * 设置推送令牌
+     *
+     * @param pushToken 推送令牌
+     */
+    public void setPushToken(String pushToken) {
+        this.pushToken = pushToken == null ? null : pushToken.trim();
+    }
+
+    /**
+     * 获取注册来源
+     *
+     * @return device - 注册来源
+     */
+    public Byte getDevice() {
+        return device;
+    }
+
+    /**
+     * 设置注册来源
+     *
+     * @param device 注册来源
+     */
+    public void setDevice(Byte device) {
+        this.device = device;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -209,7 +256,9 @@ public class PfUser implements Serializable {
             && (this.getPhoneNum() == null ? other.getPhoneNum() == null : this.getPhoneNum().equals(other.getPhoneNum()))
             && (this.getRegTime() == null ? other.getRegTime() == null : this.getRegTime().equals(other.getRegTime()))
             && (this.getRecommendUserId() == null ? other.getRecommendUserId() == null : this.getRecommendUserId().equals(other.getRecommendUserId()))
-            && (this.getMemberEndDate() == null ? other.getMemberEndDate() == null : this.getMemberEndDate().equals(other.getMemberEndDate()));
+            && (this.getMemberEndDate() == null ? other.getMemberEndDate() == null : this.getMemberEndDate().equals(other.getMemberEndDate()))
+            && (this.getPushToken() == null ? other.getPushToken() == null : this.getPushToken().equals(other.getPushToken()))
+            && (this.getDevice() == null ? other.getDevice() == null : this.getDevice().equals(other.getDevice()));
     }
 
     @Override
@@ -223,6 +272,8 @@ public class PfUser implements Serializable {
         result = prime * result + ((getRegTime() == null) ? 0 : getRegTime().hashCode());
         result = prime * result + ((getRecommendUserId() == null) ? 0 : getRecommendUserId().hashCode());
         result = prime * result + ((getMemberEndDate() == null) ? 0 : getMemberEndDate().hashCode());
+        result = prime * result + ((getPushToken() == null) ? 0 : getPushToken().hashCode());
+        result = prime * result + ((getDevice() == null) ? 0 : getDevice().hashCode());
         return result;
     }
 
@@ -239,6 +290,8 @@ public class PfUser implements Serializable {
         sb.append(", regTime=").append(regTime);
         sb.append(", recommendUserId=").append(recommendUserId);
         sb.append(", memberEndDate=").append(memberEndDate);
+        sb.append(", pushToken=").append(pushToken);
+        sb.append(", device=").append(device);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

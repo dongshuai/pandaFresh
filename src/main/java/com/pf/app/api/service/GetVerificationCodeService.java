@@ -70,7 +70,23 @@ public class GetVerificationCodeService extends AbstractService<GetVerificationC
             }
         }
         //调用阿里大鱼短信接口
-        MsgUtil.sendLoginMsgCode(phoneNum,code);
+        int type = vo.getType();
+        if(type == 1){
+            logger.debug("发送登录或注册短信验证码");
+            MsgUtil.sendLoginMsgCode(phoneNum,code);
+        }else if(type == 2){
+            logger.debug("发送第三方手机绑定验证码");
+            MsgUtil.sendThirdBindPhoneMsgCode(phoneNum,code);
+        }else if (type == 3){
+            logger.debug("发送修改支付密码 验证码");
+            MsgUtil.sendModifyPayPasswordMsgCode(phoneNum,code);
+        }else if (type ==4){
+            logger.debug("发送修改绑定手机验证码");
+            MsgUtil.sendModifyBindPhoneNumMsgCode(phoneNum,code);
+        }else {
+            logger.debug("短信验证码类型错误");
+            return error(10006,"短信验证码类型错误");
+        }
         logger.debug("手机验证码：{}",code);
         logger.info("发送验证码结束");
 

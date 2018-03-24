@@ -96,7 +96,7 @@ public class ThirdPartyLoginService extends AbstractService<ThirdPartyLoginVo> {
 		}
 
 		List<PfThirdPartyLoginInfo> list = pfThirdPartyLoginInfoMapper.selectByExample(exm);
-		if(null != list && list.size()>0){//授权过查询用户信息
+		if(null != list && list.size()>0){
 			logger.debug("绑定过");
 			PfThirdPartyLoginInfo other = list.get(0);
 
