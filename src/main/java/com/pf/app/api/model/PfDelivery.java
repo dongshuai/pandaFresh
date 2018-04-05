@@ -1,5 +1,7 @@
 package com.pf.app.api.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -58,6 +60,7 @@ public class PfDelivery implements Serializable {
      * 送达时间
      */
     @Column(name = "arrive_time")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date arriveTime;
 
     private static final long serialVersionUID = 1L;

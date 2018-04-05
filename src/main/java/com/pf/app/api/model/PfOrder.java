@@ -1,13 +1,41 @@
 package com.pf.app.api.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Table(name = "pf_order")
 public class PfOrder implements Serializable {
+
+    @Transient
+    private List<PfShoppingCart> goodsList;
+    @Transient
+    private List<PfDelivery> deliveryList;
+    /**
+     * 订单创建时间
+     */
+    @Column(name = "create_time")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date createTime;
+
+    public List<PfShoppingCart> getGoodsList() {
+        return goodsList;
+    }
+
+    public void setGoodsList(List<PfShoppingCart> goodsList) {
+        this.goodsList = goodsList;
+    }
+
+    public List<PfDelivery> getDeliveryList() {
+        return deliveryList;
+    }
+
     /**
      * 主键
      */
@@ -71,11 +99,9 @@ public class PfOrder implements Serializable {
      */
     private Long voucher;
 
-    /**
-     * 订单创建时间
-     */
-    @Column(name = "create_time")
-    private Date createTime;
+    public void setDeliveryList(List<PfDelivery> deliveryList) {
+        this.deliveryList = deliveryList;
+    }
 
     /**
      * 订单支付时间

@@ -60,9 +60,9 @@ public class LoginService extends AbstractService<LoginVo> {
         if(StringUtils.isBlank(vo.getVerificationCode())){
             return error(1000,"验证码错误");
         }
-        if(StringUtils.isBlank(vo.getPushToken())){
+       /* if(StringUtils.isBlank(vo.getPushToken())){
             return error(1000,"推送令牌为空");
-        }
+        }*/
         if(StringUtils.isBlank(vo.getDevice())){
             return error(1000,"登录设备为空");
         }

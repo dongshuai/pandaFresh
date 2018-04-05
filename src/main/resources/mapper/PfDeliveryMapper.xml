@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pf.app.api.mapper.PfDeliveryMapper" >
+  <resultMap id="BaseResultMap" type="com.pf.app.api.model.PfDelivery" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="order_id" property="orderId" jdbcType="BIGINT" />
+    <result column="type" property="type" jdbcType="TINYINT" />
+    <result column="amout" property="amout" jdbcType="BIGINT" />
+    <result column="delivery_person_id" property="deliveryPersonId" jdbcType="BIGINT" />
+    <result column="delivery_company" property="deliveryCompany" jdbcType="VARCHAR" />
+    <result column="delivery_num" property="deliveryNum" jdbcType="VARCHAR" />
+    <result column="arrive_time" property="arriveTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    id, user_id, order_id, type, amout, delivery_person_id, delivery_company, delivery_num, 
+    arrive_time
+  </sql>
+</mapper>

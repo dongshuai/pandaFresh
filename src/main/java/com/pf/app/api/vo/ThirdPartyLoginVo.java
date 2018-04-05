@@ -3,8 +3,18 @@ package com.pf.app.api.vo;
 import java.util.Date;
 
 public class ThirdPartyLoginVo implements VO {
-    /** 三方登录用户ID */
+
+	private String pushToken;
+	/** 三方登录用户ID */
     private Integer otherId;
+
+	public String getPushToken() {
+		return pushToken;
+	}
+
+	public void setPushToken(String pushToken) {
+		this.pushToken = pushToken;
+	}
     /** 用户ID，微博和QQ有值 */
     private String uid;
     /** 微信和QQ有值 */

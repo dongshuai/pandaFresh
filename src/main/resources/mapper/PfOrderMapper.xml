@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pf.app.api.mapper.PfOrderMapper">
+    <resultMap id="BaseResultMap" type="com.pf.app.api.model.PfOrder">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="order_num" property="orderNum" jdbcType="VARCHAR"/>
+        <result column="deal_stream" property="dealStream" jdbcType="VARCHAR"/>
+        <result column="amount" property="amount" jdbcType="BIGINT"/>
+        <result column="real_amount" property="realAmount" jdbcType="BIGINT"/>
+        <result column="deliver_fee" property="deliverFee" jdbcType="BIGINT"/>
+        <result column="pay_type" property="payType" jdbcType="TINYINT"/>
+        <result column="redbag" property="redbag" jdbcType="BIGINT"/>
+        <result column="voucher_id" property="voucherId" jdbcType="BIGINT"/>
+        <result column="voucher" property="voucher" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="pay_time" property="payTime" jdbcType="TIMESTAMP"/>
+        <result column="bill_flag" property="billFlag" jdbcType="TINYINT"/>
+        <result column="bill_id" property="billId" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <resultMap id="OrderListMap" extends="BaseResultMap" type="com.pf.app.api.model.PfOrder">
+
+        <collection property="goodsList" columnPrefix="goods_"
+                    resultMap="com.pf.app.api.mapper.PfShoppingCartMapper.BaseResultMap"/>
+        <collection property="deliveryList" columnPrefix="delivery_"
+                    resultMap="com.pf.app.api.mapper.PfDeliveryMapper.BaseResultMap"/>
+
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        id, user_id, order_num, deal_stream, amount, real_amount, deliver_fee, pay_type,
+        redbag, voucher_id, voucher, create_time, pay_time, bill_flag, bill_id
+    </sql>
+
+    <select id="selectOderList" resultMap="OrderListMap" parameterType="java.lang.Integer">
+        SELECT
+          sc.`goods_id` goods_goods_id,
+        sc.`goods_name` goods_goods_name,
+        sc.`amount` goods_goods_amount,
+        sc.`delivery_id` goods_delivery_id,
+        sc.`delivery_type` goods_delivery_type,
+
+        d.`arrive_time` delivery_arrive_time,
+
+        o.`id`,
+        o.`create_time`,
+        o.`amount`,
+        o.`real_amount`
+
+        FROM
+          pf_shopping_cart sc
+        LEFT JOIN pf_delivery d ON sc.`delivery_id` = d.`id`
+        LEFT JOIN pf_order o ON o.`id` = d.`order_id`
+        <where>
+            <if test="status != null and status == 0 ">
+                AND  sc.`delivery_id` == 0
+            </if>
+            <if test="status != null and status == 1 ">
+                AND  sc.`delivery_id` != 0
+            </if>
+            <if test="status != null and status == 2 ">
+                AND  sc.`delivery_id` != 0 AND  d.`delivery_person_id` is NOT NULL IS NOT NULL
+            </if>
+            <if test="status != null and status == 3 ">
+                AND  sc.`delivery_id` != 0 AND  d.`arrive_time` is NOT NULL IS NOT NULL
+            </if>
+        </where>
+  </select>
+
+
+</mapper>
